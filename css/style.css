@@ -1,24 +1,56 @@
 body{
+    display: flex;
     height: 100vh;
     border-radius: 10px;
     border-style: solid;
+    box-sizing: border-box;
+    flex-direction: column;
+    max-width: 700px;
+    text-align: center;
+    margin: auto;
+    background-color: aliceblue;
+    /* background-color: rgb(196, 194, 194); */
 }
-
-
+/* #wrapper{
+    height:100vh;
+    width: 100vw;
+    background-color: rgb(196, 194, 194);
+} */
+/* #hidder{
+    height: 1000px;
+    width: 100px;
+    background-color: aliceblue;
+    z-index: 100;
+} */
+#header{
+    font-size: 40px;
+    text-align: center;
+}
+#areaB{
+    text-align: center;
+}
 #frog{
     height: 50px; 
     width: 50px;
     top: 0px;
-    left: 0px;
+    left: 250px;
     background-color: rgb(7, 244, 34);
     color: aliceblue;
     position: relative;
+    z-index:90;
 }
-
-#area{
-    height: 500px;
+#stats{
+    height: 50px;
+    background-color: darkgray;
+}
+#gameArea{
+    margin-top: 50px;
+    margin-left: 0px;
+    height: 550px;
     width: 500px;
     border-style: solid;
+    border-radius: 10px;
+    z-index:100;
 }
 
 #enemy{
@@ -29,4 +61,107 @@ body{
     background-color: rgb(255, 0, 0);
     color: aliceblue;
     position: relative;
+    z-index: 89;
+}
+#enemy2{
+    height: 50px;
+    width: 50px;
+    top: 0px;
+    left: 500px;
+    background-color: rgb(255, 0, 0);
+    color: aliceblue;
+    position: relative;
+    z-index: 89;
+}
+#enemy3{
+    height: 50px;
+    width: 50px;
+    top: 0px;
+    left: 500px;
+    background-color: rgb(255, 0, 0);
+    color: aliceblue;
+    position: relative;
+    z-index: 80;
+}
+#road1{
+        height: 50px;
+        background-color: rgb(45, 44, 44);
+}
+
+#road{
+    height: 50px;
+    /* border-style: dashed;
+    border-left: 0px;
+    border-right: 0px;
+    border-width: 1px;
+    border-color: aliceblue; */
+    background-color: rgb(45, 44, 44);
+}
+
+#startArea{
+    background-color: darkolivegreen;
+    height: 50px;
+}
+
+#safeArea{
+    background-color: darkolivegreen;
+    height: 50px;
+}
+
+#river{
+    background-color: rgb(3, 70, 238);
+    height: 50px;
+}
+
+#finArea{
+    background-color: darkolivegreen;
+    height: 50px;
+    z-index: 0;
+}
+
+#log{
+    height: 50px;
+    width: 150px;
+    top: 0px;
+    left: 500px;
+    background-color: rgb(97, 54, 0);
+    color: aliceblue;
+    position: relative;
+    z-index: 80;
+}
+#log2{
+    height: 50px;
+    width: 150px;
+    top: 0px;
+    left: -150px;
+    background-color: rgb(97, 54, 0);
+    color: aliceblue;
+    position: relative;
+}
+#log3{
+    height: 50px;
+    width: 150px;
+    top: 0px;
+    left: 500px;
+    background-color: rgb(97, 54, 0);
+    color: aliceblue;
+    position: relative;
+}
+
+
+#gameBody{
+    display: flex;
+    justify-content: center;
+
+}
+
+#car{
+    height: 50px;
+    width: 50px;
+    top: 0px;
+    left: 500px;
+    background-color: rgb(255, 0, 0);
+    color: aliceblue;
+    position: relative;
+    z-index: 89;
 }
