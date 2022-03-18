@@ -26,7 +26,7 @@ let idLog2 = null;
 let idLog3 = null;
 let idLog4 = null;
 frog.style.top = `0px`;
-frog.style.left = `225px`;
+frog.style.left = `250px`;
 let carString = [enmElOne, enmElTwo, enmElThree, enmElFour];
 let carId = [idEnm, idEnm1, idEnm2, idEnm3];
 let treeStringR = [log1, log3];
@@ -42,7 +42,7 @@ document.addEventListener("keydown", moveFrg);
 //restarts Game
 function init() {
   frog.style.top = `0px`;
-  frog.style.left = `225px`;
+  frog.style.left = `250px`;
   console.log("init");
   alive = true;
   win = false;
@@ -67,19 +67,19 @@ function render() {
 //Randomizes cars and Tree Positions before the game starts for 'unqiue' games
 function randomCarTree() {
   for (i = 0; i < 4; i++) {
-    ranSpeed = Math.floor(Math.random() * 5) + 5;
-    ranCarOne = Math.floor(Math.random() * 500);
+    ranSpeed = Math.floor(Math.random() * 5)+2;
+    ranCarOne = Math.floor(Math.random() * 700);
     carString[i].style.left = ranCarOne + "px";
     myMoveEnm(carString[i], carId[i], ranCarOne, ranSpeed);
   }
   for (i = 0; i < 2; i++) {
     ranSpeed = Math.floor(Math.random() * 5) + 8;
-    ranTreePlace = Math.floor(Math.random() * 500);
+    ranTreePlace = Math.floor(Math.random() * 600);
     myMoveTree(treeStringR[i], treeIdR[i], ranTreePlace, ranSpeed);
   }
 
-  myMoveTreeL(treeStringL[0], treeIdL[0], 100, 15);
-  myMoveTreeL(treeStringL[1], treeIdL[1], 250, 15);
+  myMoveBigTreeL(treeStringL[0], treeIdL[0], 100, 15,600);
+  myMoveTreeL(treeStringL[1], treeIdL[1], 400, 15,500);
 }
 
 //function that moves frog
@@ -137,15 +137,22 @@ function frgHop(directs, cangeVal) {
 //need to add one for the cars to move the other way
 //moves ennemy/car accross screen right to Left
 function myMoveEnm(enm, id, posistion, speed) {
-  //console.log(enm);
+  let carLength = 49;
   let pos = posistion;
   clearInterval(id);
   id = setInterval(Drive, speed);
   function Drive() {
     if (pos == -50) {
-      enm.style.left = `500px`;
-      pos = 500;
-    } else {
+      enm.style.left = `600px`;
+      pos = 600;
+      carLength = 50;
+      enm.style.width = 50 + "px";
+    }else if(pos <= 0 && pos >= -49){
+      enm.style.width = carLength + "px";
+      pos--;
+      carLength--;
+    } 
+    else {
       pos--;
       enm.style.left = pos + "px";
       detect(enm);
@@ -155,15 +162,22 @@ function myMoveEnm(enm, id, posistion, speed) {
 
 //moves tree accross screen right to left
 function myMoveTree(enm, id, posistion, speed) {
-  //console.log(enm);
+  let logLength = 150;
+  
   let pos = posistion;
   clearInterval(id);
   id = setInterval(Drive, speed);
   function Drive() {
-    if (pos == -100) {
-      enm.style.left = `500px`;
-      pos = 500;
-    } else {
+    if (pos == -150){ 
+      pos = 550;
+      enm.style.width = 150 + "px";
+      logLength = 150;
+    }else if(pos <= 0 && pos >= -149){
+      enm.style.width = logLength + "px";
+      pos--;
+      logLength--;
+    } 
+    else {
       pos--;
       enm.style.left = pos + "px";
       detectOnTree(enm);
@@ -172,22 +186,51 @@ function myMoveTree(enm, id, posistion, speed) {
 }
 
 // Move row two of trees left to right
-function myMoveTreeL(enm, id, posistion, speed) {
+function myMoveBigTreeL(enm, id, posistion, speed) {
   //console.log(enm);
   let pos = posistion;
   clearInterval(id);
   id = setInterval(Drive, speed);
   function Drive() {
-    if (pos == 400) {
+    if (pos == 500) {
       enm.style.left = `-200px`;
-      pos = -200;
-    } else {
+      pos = -160;
+    // }else if(pos >= 0 && pos <= 150){
+    //   enm.style.width = logLength + "px";
+    //   pos++;
+    //   logLength++;
+    }  
+    else {
       pos++;
       enm.style.left = pos + "px";
       detectOnTreeL(enm);
     }
   }
 }
+
+function myMoveTreeL(enm, id, posistion, speed) {
+  //console.log(enm);
+  let pos = posistion;
+  clearInterval(id);
+  id = setInterval(Drive, speed);
+  function Drive() {
+    if (pos == 450) {
+      enm.style.left = `-300px`;
+      pos = -250;
+    // }else if(pos >= 0 && pos <= 150){
+    //   enm.style.width = logLength + "px";
+    //   pos++;
+    //   logLength++;
+    }  
+    else {
+      pos++;
+      enm.style.left = pos + "px";
+      detectOnTreeL(enm);
+    }
+  }
+}
+
+
 
 //enemy dectect function to see if the car hit the frog
 function detect(en) {
