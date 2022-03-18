@@ -10,6 +10,7 @@ const gameAr = document.querySelector('#gameArea');
 const enmElOne = document.querySelector("#enemy");
 const enmElTwo = document.querySelector("#enemy2");
 const enmElThree = document.querySelector("#enemy3");
+const enmElFour = document.querySelector("#enemy4");
 const log1 = document.querySelector('#log');
 const log2 = document.querySelector('#log2');
 const log3 = document.querySelector('#log3');
@@ -24,6 +25,8 @@ let iD = null;
 let idEnm = null;
 let idEnm1 = null;
 let idEnm2 = null;
+let idEnm3 = null;
+
 let idLog = null;
 let idLog2 = null;
 let idLog3 = null;
@@ -31,7 +34,36 @@ let enemySpeed = 10;
 frog.style.top = `0px`;
 frog.style.left = `225px`;
 
-enmElOne.style.left = `300px`;
+
+
+
+function randomCarTree(){
+let carString = [enmElOne, enmElTwo, enmElThree, enmElFour];
+let carId = [idEnm,idEnm1,idEnm2,idEnm3];
+
+console.log(carString.length);
+
+
+for(i = 0; i < 4; i++){
+ ranCarOne = Math.floor(Math.random() * 500);
+ carString[i].style.left = ranCarOne + 'px';
+ myMoveEnm(carString[i], carId[i], ranCarOne);
+}
+}
+
+randomCarTree();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //car ids for setIntervals
@@ -83,7 +115,7 @@ console.log(winCon.offsetTop);
 document.addEventListener("keydown", moveFrg);
 
 btnElO.addEventListener("click", function(){
-   myMoveEnm(enmElOne, idEnm, 300);
+   myMoveEnm(enmElOne, idEnm, ranCarOne);
 })
 btnElTW.addEventListener("click", function(){
   myMoveEnm(enmElTwo, idEnm1, 500);
