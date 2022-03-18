@@ -118,10 +118,21 @@ body{
     height: 50px;
 }
 
-#river{
+#river1{
+    display: flex;
     background-color: rgb(3, 70, 238);
     height: 50px;
 }
+#river2{
+    display: flex;
+    background-color: rgb(3, 70, 238);
+    height: 50px;
+}
+#river3{
+    background-color: rgb(3, 70, 238);
+    height: 50px;
+}
+
 
 #finArea{
     background-color: darkolivegreen;
@@ -151,6 +162,24 @@ body{
 #log3{
     height: 50px;
     width: 150px;
+    top: 0px;
+    left: 500px;
+    background-color: rgb(97, 54, 0);
+    color: aliceblue;
+    position: relative;
+}
+#log3{
+    height: 50px;
+    width: 150px;
+    top: 0px;
+    left: 500px;
+    background-color: rgb(97, 54, 0);
+    color: aliceblue;
+    position: relative;
+}
+#smlLog{
+    height: 50px;
+    width: 100px;
     top: 0px;
     left: 500px;
     background-color: rgb(97, 54, 0);
