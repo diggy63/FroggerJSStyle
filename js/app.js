@@ -3,8 +3,9 @@ const btnElO = document.querySelector("#One");
 const btnElTW = document.querySelector("#Two");
 const btnElTH = document.querySelector("#Three");
 const display = document.querySelector('#stats');
-const winCon = document.querySelector('#finArea')
-const roadOne = document.querySelector('#road1')
+const winCon = document.querySelector('#finArea');
+const roadOne = document.querySelector('#road1');
+const gameAr = document.querySelector('#gameArea');
 
 const enmElOne = document.querySelector("#enemy");
 const enmElTwo = document.querySelector("#enemy2");
@@ -30,18 +31,27 @@ let enemySpeed = 10;
 frog.style.top = `0px`;
 frog.style.left = `225px`;
 
-//test test
-let div = document.createElement('div');
-div.className = "#enemy";
-winCon.appendChild(div);
+enmElOne.style.left = `300px`;
 
+
+//car ids for setIntervals
+let idCar1 = null
+
+//test test
+// let div = document.createElement('div');
+// div.className = "#enemy";
+// winCon.appendChild(div);
 //class to create Cars
 class enmCar {
-  constructor(rowLoc, roadLoc ) {
+  constructor(rowLoc, roadLoc, id) {
     this.rowLoc = rowLoc;
     this.roadLoc = roadLoc;
+    this.id = id;
     this.class = "car"
   }
+  // placeCar (){
+  //   gameAr.appendChild()
+  // }
   // function myMoveEnm(enm,id) {
   //   //console.log(enm);
   //   let pos = 500;
@@ -61,6 +71,8 @@ class enmCar {
 
 }
 
+//let car1 = new enmCar("road1","300px",idCar1);
+
 
 
 
@@ -71,13 +83,13 @@ console.log(winCon.offsetTop);
 document.addEventListener("keydown", moveFrg);
 
 btnElO.addEventListener("click", function(){
-   myMoveEnm(enmElOne, idEnm);
+   myMoveEnm(enmElOne, idEnm, 300);
 })
 btnElTW.addEventListener("click", function(){
-  myMoveEnm(enmElTwo, idEnm1);
+  myMoveEnm(enmElTwo, idEnm1, 500);
 })
 btnElTH.addEventListener("click", function(){
-  myMoveEnm(enmElThree, idEnm2);
+  myMoveEnm(enmElThree, idEnm2, 500);
 })
 
 myMoveTree(log1,idLog);
@@ -166,9 +178,9 @@ function moveFrg(e) {
 }
 
 //moves ennemy/car accross screen right to Left
-function myMoveEnm(enm,id) {
+function myMoveEnm(enm,id,posistion) {
   //console.log(enm);
-  let pos = 500;
+  let pos = posistion;
   clearInterval(id);
   id = setInterval(Drive, 5);
   function Drive() {
