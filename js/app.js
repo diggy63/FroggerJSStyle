@@ -1,7 +1,4 @@
 const frog = document.querySelector("#frog");
-const btnElO = document.querySelector("#One");
-const btnElTW = document.querySelector("#Two");
-const btnElTH = document.querySelector("#Three");
 const display = document.querySelector('#stats');
 const winCon = document.querySelector('#finArea');
 const roadOne = document.querySelector('#road1');
@@ -14,26 +11,26 @@ const enmElFour = document.querySelector("#enemy4");
 const log1 = document.querySelector('#log');
 const log2 = document.querySelector('#log2');
 const log3 = document.querySelector('#log3');
-//console.log(btnElO);
 let alive = true;
 let onTree = false;
 let win = false;
-let pos = 10;
-let posr = 10;
 let mov = 1;
 let iD = null;
 let idEnm = null;
 let idEnm1 = null;
 let idEnm2 = null;
 let idEnm3 = null;
-
 let idLog = null;
 let idLog2 = null;
 let idLog3 = null;
-let enemySpeed = 10;
 frog.style.top = `0px`;
 frog.style.left = `225px`;
-
+let carString = [enmElOne, enmElTwo, enmElThree, enmElFour];
+let carId = [idEnm,idEnm1,idEnm2,idEnm3];
+let treeStringR = [log1,log3];
+let treeIdR = [idLog, idLog3];
+let treeStringL = [log2];
+let treeIdL = [idLog2];
 
 
 
@@ -41,14 +38,28 @@ function randomCarTree(){
 let carString = [enmElOne, enmElTwo, enmElThree, enmElFour];
 let carId = [idEnm,idEnm1,idEnm2,idEnm3];
 
+
 console.log(carString.length);
 
 
 for(i = 0; i < 4; i++){
+  ranSpeed = (Math.floor(Math.random() * 5)+5);
  ranCarOne = Math.floor(Math.random() * 500);
  carString[i].style.left = ranCarOne + 'px';
- myMoveEnm(carString[i], carId[i], ranCarOne);
+ myMoveEnm(carString[i], carId[i], ranCarOne, ranSpeed);
 }
+for(i = 0; i< 2; i++){
+  ranSpeed = (Math.floor(Math.random() * 5)+8);
+  ranTreePlace = Math.floor(Math.random() * 500);
+  myMoveTree(treeStringR[i], treeIdR[i], ranTreePlace, ranSpeed);
+}
+for(i = 0; i< 1; i++){
+  ranSpeed = (Math.floor(Math.random() * 5)+8);
+  ranTreePlace = Math.floor(Math.random() * 500);
+  myMoveTreeL(treeStringL[i], treeIdL[i], ranTreePlace, ranSpeed);
+}
+
+
 }
 
 randomCarTree();
@@ -104,29 +115,8 @@ class enmCar {
 }
 
 //let car1 = new enmCar("road1","300px",idCar1);
-
-
-
-
-
-console.log(winCon.offsetTop);
-
 //listens to key stokes. basically the controls
 document.addEventListener("keydown", moveFrg);
-
-btnElO.addEventListener("click", function(){
-   myMoveEnm(enmElOne, idEnm, ranCarOne);
-})
-btnElTW.addEventListener("click", function(){
-  myMoveEnm(enmElTwo, idEnm1, 500);
-})
-btnElTH.addEventListener("click", function(){
-  myMoveEnm(enmElThree, idEnm2, 500);
-})
-
-myMoveTree(log1,idLog);
-myMoveTree(log3,idLog3);
-myMoveTreeL(log2,idLog2);
 
 
 
@@ -210,11 +200,11 @@ function moveFrg(e) {
 }
 
 //moves ennemy/car accross screen right to Left
-function myMoveEnm(enm,id,posistion) {
+function myMoveEnm(enm,id,posistion,speed) {
   //console.log(enm);
   let pos = posistion;
   clearInterval(id);
-  id = setInterval(Drive, 5);
+  id = setInterval(Drive, speed);
   function Drive() {
     if (pos == -50) {
       enm.style.left = `500px`;
@@ -231,11 +221,11 @@ function myMoveEnm(enm,id,posistion) {
 
 
 //moves tree accross screen left to right
-function myMoveTree(enm,id) {
+function myMoveTree(enm,id,posistion,speed) {
   //console.log(enm);
-  let pos = 500;
+  let pos = posistion;
   clearInterval(id);
-  id = setInterval(Drive, 15);
+  id = setInterval(Drive, speed);
   function Drive() {
     if (pos == -100) {
       enm.style.left = `500px`;
