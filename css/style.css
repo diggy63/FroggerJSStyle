@@ -5,17 +5,28 @@ body{
 }
 
 
-#square{
-    height: 50px;
+#frog{
+    height: 50px; 
     width: 50px;
-    background-color: black;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(7, 244, 34);
     color: aliceblue;
     position: relative;
-    top: 50%;
 }
 
 #area{
-    height: 1000px;
-    width: 1000px;
+    height: 500px;
+    width: 500px;
     border-style: solid;
+}
+
+#enemy{
+    height: 50px;
+    width: 50px;
+    top: 0px;
+    left: 500px;
+    background-color: rgb(255, 0, 0);
+    color: aliceblue;
+    position: relative;
 }
