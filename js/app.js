@@ -3,7 +3,7 @@ const display = document.querySelector("#stats");
 const winCon = document.querySelector("#finArea");
 const roadOne = document.querySelector("#road1");
 const gameAr = document.querySelector("#gameArea");
-
+let frogImg = document.querySelector("#frogImg").src;
 const enmElOne = document.querySelector("#enemy");
 const enmElTwo = document.querySelector("#enemy2");
 const enmElThree = document.querySelector("#enemy3");
@@ -11,9 +11,9 @@ const enmElFour = document.querySelector("#enemy4");
 const log1 = document.querySelector("#log");
 const log2 = document.querySelector("#log2");
 const log3 = document.querySelector("#log3");
-const log4 = document.querySelector("#smlLog");
+const log4 = document.querySelector("#log4");
+let onLog = false;
 let alive = true;
-let onTree = false;
 let win = false;
 let mov = 1;
 let iD = null;
@@ -37,7 +37,7 @@ let treeIdL = [idLog2, idLog4];
 init();
 randomCarTree();
 //listens to key stokes. basically the controls
-document.addEventListener("keydown", moveFrg);
+//document.addEventListener("keydown", moveFrg);
 
 //restarts Game
 function init() {
@@ -46,6 +46,7 @@ function init() {
   console.log("init");
   alive = true;
   win = false;
+  document.addEventListener("keydown", moveFrg);
   // Needs a clear function so that it works better
   // randomCarTree();
   //display.innerHTML = "Let's Play Frogger"
@@ -67,7 +68,7 @@ function render() {
 //Randomizes cars and Tree Positions before the game starts for 'unqiue' games
 function randomCarTree() {
   for (i = 0; i < 4; i++) {
-    ranSpeed = Math.floor(Math.random() * 5)+2;
+    ranSpeed = Math.floor(Math.random() * 5) + 2;
     ranCarOne = Math.floor(Math.random() * 700);
     carString[i].style.left = ranCarOne + "px";
     myMoveEnm(carString[i], carId[i], ranCarOne, ranSpeed);
@@ -78,8 +79,9 @@ function randomCarTree() {
     myMoveTree(treeStringR[i], treeIdR[i], ranTreePlace, ranSpeed);
   }
 
-  myMoveBigTreeL(treeStringL[0], treeIdL[0], 100, 15,600);
-  myMoveTreeL(treeStringL[1], treeIdL[1], 400, 15,500);
+  myMoveBigTreeL(treeStringL[0], treeIdL[0], 100, 15, -150, 20);
+  //cannot do two logs yet the dectction only works for one row
+  //myMoveBigTreeL(treeStringL[1], treeIdL[1], 300, 15, -300, 20);
 }
 
 //function that moves frog
@@ -94,6 +96,7 @@ function moveFrg(e) {
   if (e.key === "s") {
     iD = setInterval(frgHop, hopSpeed, "down", frog.style.top);
   } else if (e.key === "d") {
+    frogImg = "../images/frogStaticRight.png";
     iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
     // frog.style.left = `${parseInt(frog.style.left) + mov}px`;
   } else if (e.key === "a") {
@@ -107,9 +110,14 @@ function moveFrg(e) {
 
 //function that gives frog smooth hop
 function frgHop(directs, cangeVal) {
+  if (frog.offsetTop === winCon.offsetTop) {
+    win = true;
+    clearInterval(iD);
+    render();
+  }
   if (mov === 50) {
-    console.log(frog.offsetTop);
-    console.log(winCon.offsetTop);
+    //console.log(frog.offsetTop);
+    //console.log(winCon.offsetTop);
     clearInterval(iD);
     if (frog.offsetTop === winCon.offsetTop) {
       win = true;
@@ -142,17 +150,12 @@ function myMoveEnm(enm, id, posistion, speed) {
   clearInterval(id);
   id = setInterval(Drive, speed);
   function Drive() {
-    if (pos == -50) {
+    if (pos == -100) {
       enm.style.left = `600px`;
       pos = 600;
       carLength = 50;
       enm.style.width = 50 + "px";
-    }else if(pos <= 0 && pos >= -49){
-      enm.style.width = carLength + "px";
-      pos--;
-      carLength--;
-    } 
-    else {
+    }  else {
       pos--;
       enm.style.left = pos + "px";
       detect(enm);
@@ -163,20 +166,21 @@ function myMoveEnm(enm, id, posistion, speed) {
 //moves tree accross screen right to left
 function myMoveTree(enm, id, posistion, speed) {
   let logLength = 150;
-  
+
   let pos = posistion;
   clearInterval(id);
   id = setInterval(Drive, speed);
   function Drive() {
-    if (pos == -150){ 
+    if (pos == -165) {
       pos = 550;
       enm.style.width = 150 + "px";
       logLength = 150;
-    }else if(pos <= 0 && pos >= -149){
-      enm.style.width = logLength + "px";
-      pos--;
-      logLength--;
-    } 
+    }
+    //else if(pos <= 0 && pos >= -149){
+    //   enm.style.width = logLength + "px";
+    //   pos--;
+    //   logLength--;
+    // }
     else {
       pos--;
       enm.style.left = pos + "px";
@@ -186,51 +190,21 @@ function myMoveTree(enm, id, posistion, speed) {
 }
 
 // Move row two of trees left to right
-function myMoveBigTreeL(enm, id, posistion, speed) {
+function myMoveBigTreeL(enm, id, posistion, speed, startId, offesetL) {
   //console.log(enm);
   let pos = posistion;
   clearInterval(id);
   id = setInterval(Drive, speed);
   function Drive() {
-    if (pos == 500) {
-      enm.style.left = `-200px`;
-      pos = -160;
-    // }else if(pos >= 0 && pos <= 150){
-    //   enm.style.width = logLength + "px";
-    //   pos++;
-    //   logLength++;
-    }  
-    else {
+    if (pos == 708 + startId) {
+      pos = startId - 25;
+    } else {
       pos++;
       enm.style.left = pos + "px";
-      detectOnTreeL(enm);
+      detectOnTreeL(enm, offesetL);
     }
   }
 }
-
-function myMoveTreeL(enm, id, posistion, speed) {
-  //console.log(enm);
-  let pos = posistion;
-  clearInterval(id);
-  id = setInterval(Drive, speed);
-  function Drive() {
-    if (pos == 450) {
-      enm.style.left = `-300px`;
-      pos = -250;
-    // }else if(pos >= 0 && pos <= 150){
-    //   enm.style.width = logLength + "px";
-    //   pos++;
-    //   logLength++;
-    }  
-    else {
-      pos++;
-      enm.style.left = pos + "px";
-      detectOnTreeL(enm);
-    }
-  }
-}
-
-
 
 //enemy dectect function to see if the car hit the frog
 function detect(en) {
@@ -239,12 +213,12 @@ function detect(en) {
     frog.offsetTop <= parseInt(en.offsetTop) + 49
   ) {
     if (
-      parseInt(frog.offsetLeft) + 50 === en.offsetLeft ||
-      parseInt(frog.offsetLeft) === en.offsetLeft
+      parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 110) &&
+      parseInt(frog.offsetLeft) >= en.offsetLeft
     ) {
       alive = false;
       render();
-      console.log("Front hit");
+      //console.log("Front hit");
     } else if (
       parseInt(frog.offsetLeft) + 50 === parseInt(en.offsetLeft) + 50 ||
       parseInt(frog.offsetLeft) === parseInt(en.offsetLeft) + 50
@@ -256,21 +230,21 @@ function detect(en) {
 }
 
 //detection function for tress moving from left to right
-function detectOnTreeL(en) {
+function detectOnTreeL(en, offSet) {
   // if (frog.offsetTop > 37 && frog.offsetTop < 133) {
   if (
-    frog.offsetTop <= en.offsetTop &&
-    frog.offsetTop >= parseInt(en.offsetTop) + 49
+    frog.offsetTop >= en.offsetTop &&
+    frog.offsetTop <= parseInt(en.offsetTop) + 49
   ) {
     if (
-      parseInt(frog.offsetLeft) > en.offsetLeft &&
-      parseInt(frog.offsetLeft) < parseInt(en.offsetLeft + 150)
+      parseInt(frog.offsetLeft + offSet) >= en.offsetLeft &&
+      parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 150)
     ) {
-      console.log("on tree");
+      console.log("first");
     } else {
-      console.log("you drowned");
-      alive = false;
-      render();
+      console.log("which is first");
+      // alive = false;
+      // render();
     }
   }
 }
@@ -289,7 +263,7 @@ function detectOnTree(en) {
     ) {
       //tree movement almost achieved??????
       //myMoveTreeFrog(frog)
-      console.log("on tree");
+      //console.log("on tree");
     } else {
       console.log("you drowned");
       alive = false;

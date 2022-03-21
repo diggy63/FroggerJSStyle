@@ -23,18 +23,6 @@ body{
     width: 100vw;
     background-color: rgb(196, 194, 194);
 } */
-#hidder{
-    height: 1000px;
-    width: 250px;
-    background-color: aliceblue;
-    z-index: 100;
-}
-#hidder2{
-    height: 1000px;
-    width: 250px;
-    background-color: aliceblue;
-    z-index:auto;
-}
 #header{
     font-size: 40px;
     text-align: center;
@@ -44,13 +32,17 @@ body{
 }
 #frog{
     height: 50px; 
-    width: 50px;
+    width: 60px;
     top: 0px;
     left: 300px;
-    background-color: rgb(7, 244, 34);
     color: aliceblue;
     position: relative;
     z-index:90;
+}
+
+#frog > img{
+    height: auto;
+    width: 50px;
 }
 #stats{
     height: 50px;
@@ -71,7 +63,6 @@ body{
     width: 50px;
     top: 0px;
     left: 500px;
-    background-color: rgb(255, 0, 0);
     color: aliceblue;
     position: relative;
     z-index: 89;
@@ -81,7 +72,6 @@ body{
     width: 50px;
     top: 0px;
     left: 500px;
-    background-color: rgb(255, 0, 0);
     color: aliceblue;
     position: relative;
     z-index: 89;
@@ -91,7 +81,6 @@ body{
     width: 50px;
     top: 0px;
     left: 500px;
-    background-color: rgb(255, 0, 0);
     color: aliceblue;
     position: relative;
     z-index: 80;
@@ -101,15 +90,11 @@ body{
     width: 50px;
     top: 0px;
     left: 500px;
-    background-color: rgb(255, 0, 0);
     color: aliceblue;
     position: relative;
     z-index: 80;
 }
-#road1{
-        height: 50px;
-        background-color: rgb(45, 44, 44);
-}
+
 
 #road{
     height: 50px;
@@ -118,39 +103,46 @@ body{
     border-right: 0px;
     border-width: 1px;
     border-color: aliceblue; */
-    background-color: rgb(45, 44, 44);
+    background-image: url("../images/road.png");
+    background-color: rgb(0,0,0);
 }
 
 #startArea{
-    background-color: darkolivegreen;
+    background-image: url("../images/grass.png");
     height: 50px;
+    background-color: rgb(134,255,0);
 }
 
 #safeArea{
-    background-color: darkolivegreen;
+    background-image: url("../images/grass.png");
     height: 50px;
+    background-color: rgb(134,255,0);
 }
 
 #river1{
     display: flex;
-    background-color: rgb(3, 70, 238);
     height: 50px;
+    background-image: url("../images/water.png");
+    background-color: rgb(51,255,204);
 }
 #river2{
     display: flex;
-    background-color: rgb(3, 70, 238);
+    background-image: url("../images/water.png");
     height: 50px;
+    background-color: rgb(51,255,204);
 }
 #river3{
-    background-color: rgb(3, 70, 238);
+    background-image: url("../images/water.png");
     height: 50px;
+    background-color: rgb(51,255,204);
 }
 
 
 #finArea{
-    background-color: darkolivegreen;
+    background-image: url("../images/grass.png");
     height: 50px;
     z-index: 0;
+    background-color: rgb(134,255,0);
 }
 
 #log{
@@ -158,7 +150,6 @@ body{
     width: 150px;
     top: 0px;
     left: 500px;
-    background-color: rgb(97, 54, 0);
     color: aliceblue;
     position: relative;
     z-index: 80;
@@ -167,8 +158,7 @@ body{
     height: 50px;
     width: 150px;
     top: 0px;
-    left: -150px;
-    background-color: rgb(97, 54, 0);
+    left: -165px;
     color: aliceblue;
     position: relative;
 }
@@ -177,16 +167,14 @@ body{
     width: 150px;
     top: 0px;
     left: 500px;
-    background-color: rgb(97, 54, 0);
     color: aliceblue;
     position: relative;
 }
-#log3{
+#log4{
     height: 50px;
     width: 150px;
     top: 0px;
-    left: 500px;
-    background-color: rgb(97, 54, 0);
+    left: -315px;
     color: aliceblue;
     position: relative;
 }
@@ -201,13 +189,23 @@ body{
 }
 
 
-#car{
+img {
     height: 50px;
-    width: 50px;
-    top: 0px;
-    left: 500px;
-    background-color: rgb(255, 0, 0);
-    color: aliceblue;
-    position: relative;
-    z-index: 89;
+}
+
+/* #testArea{
+    background-color: black;
+    height: 100px;
+} */
+#hidder{
+    height: 1000px;
+    width: 250px;
+    background-color: aliceblue;
+    z-index: 999;
+}
+#hidder2{
+    height: 1000px;
+    width: 250px;
+    background-color: aliceblue;
+    z-index: 999;
 }
