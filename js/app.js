@@ -8,11 +8,14 @@ const enmElOne = document.querySelector("#enemy");
 const enmElTwo = document.querySelector("#enemy2");
 const enmElThree = document.querySelector("#enemy3");
 const enmElFour = document.querySelector("#enemy4");
+const stats = document.querySelector("#stats");
 const log1 = document.querySelector("#log");
 const log2 = document.querySelector("#log2");
 const log3 = document.querySelector("#log3");
 const log4 = document.querySelector("#log4");
-const startBtn = document.querySelector("startButton");
+const startBtn = document.querySelector("#startButton");
+let reset = false;
+let winCounter = 0;
 let count = 0;
 let onLog = false;
 let alive = true;
@@ -42,20 +45,26 @@ const frugHopUp = ["../images/frogStaticUp.png","../images/frogJumpUp1.png", "..
 const frugHopLeft = ["../images/frogStaticLeft.png","../images/frogJumpLeft1.png", "../images/frogJumpLeft2.png","../images/frogJumpLeft3.png", "../images/frogJumpLeft4.png"];
 const frugHopRight = ["../images/frogStaticRight.png","../images/frogJumpRight1.png", "../images/frogJumpRight2.png","../images/frogJumpRight3.png", "../images/frogJumpRight4.png"];
 
-console.log(startBtn);
+
 init();
-randomCarTree();
+//randomCarTree();
 startBtn.addEventListener("click", init);
 
 
 //restarts Game
 function init() {
+  reset = true;
+  setTimeout(function() {
+
   frog.style.top = `0px`;
   frog.style.left = `250px`;
-  console.log("init");
+  document.querySelector("#frogImg").src = frogTurn.down;
   alive = true;
   win = false;
+  reset = false;
+  randomCarTree();
   document.addEventListener("keydown", moveFrg);
+  },100);
   // Needs a clear function so that it works better
   // randomCarTree();
   //display.innerHTML = "Let's Play Frogger"
@@ -63,15 +72,16 @@ function init() {
 
 //renders Lose or win for right now
 function render() {
-  document.addEventListener("keydown", moveFrg);
+  //document.addEventListener("keydown", moveFrg);
   if (alive === false) {
     display.innerHTML = "You Lost";
-    //init();
+    return;
   }
   if (win === true) {
-    display.innerHTML = "You are the Best";
-    //init();
+    display.innerHTML = "You are the Best, ";
+    winCounter ++;
   }
+  document.addEventListener("keydown", moveFrg);
   count = 0;
 }
 
@@ -79,13 +89,13 @@ function render() {
 function randomCarTree() {
   for (i = 0; i < 4; i++) {
     ranSpeed = Math.floor(Math.random() * 5) + 2;
-    ranCarOne = Math.floor(Math.random() * 700);
+    ranCarOne = Math.floor(Math.random() * 600);
     carString[i].style.left = ranCarOne + "px";
     myMoveEnm(carString[i], carId[i], ranCarOne, ranSpeed);
   }
   for (i = 0; i < 2; i++) {
     ranSpeed = Math.floor(Math.random() * 5) + 8;
-    ranTreePlace = Math.floor(Math.random() * 600);
+    ranTreePlace = Math.floor(Math.random() * 550);
     myMoveTree(treeStringR[i], treeIdR[i], ranTreePlace, ranSpeed);
   }
 
@@ -96,6 +106,7 @@ function randomCarTree() {
 
 //function that moves frog
 function moveFrg(e) {
+  console.log("here");
   //this remove keystokes being read so that you dont ultimate speed
   document.removeEventListener("keydown", moveFrg, false);
   mov = 1;
@@ -107,14 +118,14 @@ function moveFrg(e) {
     document.querySelector("#frogImg").src = frogTurn.down;
     iD = setInterval(frgHop, hopSpeed, "down", frog.style.top);
   } else if (e.key === "d") {
-    document.querySelector("#frogImg").src = "../images/frogStaticRight.png";
+    document.querySelector("#frogImg").src = frogTurn.right;
     iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
     // frog.style.left = `${parseInt(frog.style.left) + mov}px`;
   } else if (e.key === "a") {
     document.querySelector("#frogImg").src = frogTurn.left;
     iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
   } else if (e.key === "w") {
-    document.querySelector("#frogImg").src = "../images/frogStaticUp.png";
+    document.querySelector("#frogImg").src = frogTurn.up;
     if (frog.style.top != `0px`) {
       iD = setInterval(frgHop, hopSpeed, "up", frog.style.top);
     }else{
@@ -175,7 +186,9 @@ function myMoveEnm(enm, id, posistion, speed) {
       pos = 600;
       carLength = 50;
       enm.style.width = 50 + "px";
-    }  else {
+    } else if(reset === true){
+      clearInterval(id);
+    } else {
       pos--;
       enm.style.left = pos + "px";
       detect(enm);
@@ -195,6 +208,8 @@ function myMoveTree(enm, id, posistion, speed) {
       pos = 550;
       enm.style.width = 150 + "px";
       logLength = 150;
+    }else if(reset === true){
+      clearInterval(id);
     }
     else {
       pos--;
@@ -212,7 +227,10 @@ function myMoveBigTreeL(enm, id, posistion, speed, startId, offesetL) {
   function Drive() {
     if (pos == 708 + startId) {
       pos = startId - 25;
-    } else {
+    }else if(reset === true){
+      clearInterval(id);
+    }
+     else {
       pos++;
       enm.style.left = pos + "px";
       detectOnTreeL(enm, offesetL);
@@ -220,7 +238,7 @@ function myMoveBigTreeL(enm, id, posistion, speed, startId, offesetL) {
   }
 }
 
-//enemy dectect function to see if the car hit the frog
+//enemy dectect function to see if the car hit the frog. If frog is hit it changes into a death symbol and you lose ability to move.
 function detect(en) {
   if (
     frog.offsetTop >= en.offsetTop &&
@@ -232,16 +250,11 @@ function detect(en) {
     ) {
       alive = false;
       document.querySelector("#frogImg").src = "../images/death.png";
+      document.removeEventListener("keydown", moveFrg, false);
+      render();
+    } 
 
-      render();
-    } else if (
-      parseInt(frog.offsetLeft) + 50 === parseInt(en.offsetLeft) + 50 ||
-      parseInt(frog.offsetLeft) === parseInt(en.offsetLeft) + 50
-    ) {
-      alive = false;
-      document.querySelector("#frogImg").src = "../images/death.png";
-      render();
-    }
+
   }
 }
 
@@ -256,6 +269,7 @@ function detectOnTreeL(en, offSet) {
       parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 150)
     ) {
     } else {
+      document.removeEventListener("keydown", moveFrg, false);
       alive = false;
       render();
     }
@@ -266,13 +280,14 @@ function detectOnTreeL(en, offSet) {
 function detectOnTree(en) {
   if (
     frog.offsetTop >= en.offsetTop &&
-    frog.offsetTop <= parseInt(en.offsetTop) + 49
+    frog.offsetTop <= parseInt(en.offsetTop) + 48
   ) {
     if (
       parseInt(frog.offsetLeft) > en.offsetLeft &&
       parseInt(frog.offsetLeft) < parseInt(en.offsetLeft + 150)
     ) {
     } else {
+      document.removeEventListener("keydown", moveFrg, false);
       console.log("you drowned");
       alive = false;
       render();

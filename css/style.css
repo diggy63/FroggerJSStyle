@@ -1,7 +1,7 @@
 body{
     display: flex;
     height: 100vh;
-    border-radius: 10px;
+    border-radius: 100px;
     border-style: solid;
     box-sizing: border-box;
     flex-direction: column;
@@ -24,8 +24,12 @@ body{
     background-color: rgb(196, 194, 194);
 } */
 #header{
+    border-radius: 15px;
+    border-style: solid;
+    margin: 30px auto;
     font-size: 40px;
     text-align: center;
+    width: 400px;
 }
 #areaB{
     text-align: center;
@@ -45,13 +49,13 @@ body{
     width: auto;
 }
 #stats{
-    height: 50px;
+    height: 100px;
     background-color: darkgray;
 }
 #gameArea{
     margin-top: 50px;
     margin-left: 0px;
-    height: 550px;
+    height: 600px;
     width: 800px;
     border-style: solid;
     border-radius: 10px;
@@ -198,14 +202,16 @@ img {
     height: 100px;
 } */
 #hidder{
-    height: 1000px;
+    height: 650px;
     width: 250px;
     background-color: aliceblue;
     z-index: 999;
 }
-#hidder2{
-    height: 1000px;
-    width: 250px;
-    background-color: aliceblue;
-    z-index: 999;
+
+#startButton{
+    margin: 20px auto;
+    border-radius: 5px;
+    border-style: solid;
+    width: 80px;
+    height: 20px;
 }
