@@ -1,5 +1,5 @@
 const frog = document.querySelector("#frog");
-const midDisplay = document.querySelector("#MidStats");
+const midDisplay = document.querySelector("#midStats");
 const winCon = document.querySelector("#finArea");
 const roadOne = document.querySelector("#road1");
 const gameAr = document.querySelector("#gameArea");
@@ -14,6 +14,7 @@ const log2 = document.querySelector("#log2");
 const log3 = document.querySelector("#log3");
 const log4 = document.querySelector("#log4");
 const startBtn = document.querySelector("#startButton");
+const winTotal = document.querySelector("#winCount");
 let reset = false;
 let winCounter = 0;
 let count = 0;
@@ -37,6 +38,8 @@ let treeStringR = [log1, log3];
 let treeIdR = [idLog, idLog3];
 let treeStringL = [log2, log4];
 let treeIdL = [idLog2, idLog4];
+
+console.log(winTotal);
 const frogTurn = {
   down: "../images/frogStatic.png",
   right: "../images/frogStaticRight.png",
@@ -115,6 +118,7 @@ function render() {
   if (win === true) {
     midDisplay.innerHTML = "You are the Best, ";
     winCounter++;
+    winTotal.innerHTML = winCounter + `!`;
     return;
   }
   document.addEventListener("keydown", moveFrg);

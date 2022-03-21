@@ -52,6 +52,7 @@ body{
     display: flex;
     height: 100px;
     background-color: darkgray;
+    justify-content: space-evenly;
 }
 #gameArea{
     margin-top: 50px;
@@ -215,4 +216,9 @@ img {
     border-style: solid;
     width: 80px;
     height: 20px;
+}
+#midStats{
+    width: 400px;
+    border-style: solid;
+    
 }
