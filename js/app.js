@@ -3,7 +3,7 @@ const display = document.querySelector("#stats");
 const winCon = document.querySelector("#finArea");
 const roadOne = document.querySelector("#road1");
 const gameAr = document.querySelector("#gameArea");
-let frogImg = document.querySelector("#frogImg").src;
+const frogImg = document.querySelector("#frogImg").src;
 const enmElOne = document.querySelector("#enemy");
 const enmElTwo = document.querySelector("#enemy2");
 const enmElThree = document.querySelector("#enemy3");
@@ -12,6 +12,8 @@ const log1 = document.querySelector("#log");
 const log2 = document.querySelector("#log2");
 const log3 = document.querySelector("#log3");
 const log4 = document.querySelector("#log4");
+const startBtn = document.querySelector("startButton");
+let count = 0;
 let onLog = false;
 let alive = true;
 let win = false;
@@ -25,19 +27,26 @@ let idLog = null;
 let idLog2 = null;
 let idLog3 = null;
 let idLog4 = null;
-frog.style.top = `0px`;
-frog.style.left = `250px`;
 let carString = [enmElOne, enmElTwo, enmElThree, enmElFour];
 let carId = [idEnm, idEnm1, idEnm2, idEnm3];
 let treeStringR = [log1, log3];
 let treeIdR = [idLog, idLog3];
 let treeStringL = [log2, log4];
 let treeIdL = [idLog2, idLog4];
+const frogTurn = {down: "../images/frogStatic.png", 
+                  right: "../images/frogStaticRight.png",
+                  left: "../images/frogStaticLeft.png",
+                  up: "../images/frogStaticUp.png"}
+const frugHopDown = ["../images/frogStatic.png","../images/frogJumpDown1.png", "../images/frogJumpDown2.png","../images/frogJumpDown3.png", "../images/frogJumpDown4.png"];
+const frugHopUp = ["../images/frogStaticUp.png","../images/frogJumpUp1.png", "../images/frogJumpUp2.png","../images/frogJumpUp3.png", "../images/frogJumpUp4.png"];
+const frugHopLeft = ["../images/frogStaticLeft.png","../images/frogJumpLeft1.png", "../images/frogJumpLeft2.png","../images/frogJumpLeft3.png", "../images/frogJumpLeft4.png"];
+const frugHopRight = ["../images/frogStaticRight.png","../images/frogJumpRight1.png", "../images/frogJumpRight2.png","../images/frogJumpRight3.png", "../images/frogJumpRight4.png"];
 
+console.log(startBtn);
 init();
 randomCarTree();
-//listens to key stokes. basically the controls
-//document.addEventListener("keydown", moveFrg);
+startBtn.addEventListener("click", init);
+
 
 //restarts Game
 function init() {
@@ -57,12 +66,13 @@ function render() {
   document.addEventListener("keydown", moveFrg);
   if (alive === false) {
     display.innerHTML = "You Lost";
-    init();
+    //init();
   }
   if (win === true) {
     display.innerHTML = "You are the Best";
-    init();
+    //init();
   }
+  count = 0;
 }
 
 //Randomizes cars and Tree Positions before the game starts for 'unqiue' games
@@ -94,52 +104,62 @@ function moveFrg(e) {
   //depending on which keystroke you hit its runs a setInterval thats "hops" to
   //its location
   if (e.key === "s") {
+    document.querySelector("#frogImg").src = frogTurn.down;
     iD = setInterval(frgHop, hopSpeed, "down", frog.style.top);
   } else if (e.key === "d") {
-    frogImg = "../images/frogStaticRight.png";
+    document.querySelector("#frogImg").src = "../images/frogStaticRight.png";
     iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
     // frog.style.left = `${parseInt(frog.style.left) + mov}px`;
   } else if (e.key === "a") {
+    document.querySelector("#frogImg").src = frogTurn.left;
     iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
   } else if (e.key === "w") {
+    document.querySelector("#frogImg").src = "../images/frogStaticUp.png";
     if (frog.style.top != `0px`) {
       iD = setInterval(frgHop, hopSpeed, "up", frog.style.top);
+    }else{
+      document.addEventListener("keydown", moveFrg);
     }
   }
 }
 
 //function that gives frog smooth hop
 function frgHop(directs, cangeVal) {
-  if (frog.offsetTop === winCon.offsetTop) {
-    win = true;
-    clearInterval(iD);
-    render();
-  }
-  if (mov === 50) {
-    //console.log(frog.offsetTop);
-    //console.log(winCon.offsetTop);
-    clearInterval(iD);
-    if (frog.offsetTop === winCon.offsetTop) {
+  if(mov === 50) {
+    if (frog.offsetTop >= (winCon.offsetTop -5)) {
       win = true;
+      clearInterval(iD);
+      render();
+      return;
     }
-    render();
-  }
-  if (mov === 120) {
     clearInterval(iD);
-  }
+    render();
+    }
+    if(mov === 120) {
+      clearInterval(iD);
+    }
   if (directs === "down") {
     // console.log(directs);
     frog.style.top = parseInt(cangeVal) + mov + `px`;
     mov++;
+    document.querySelector("#frogImg").src = frugHopDown[count];
   } else if (directs === "right") {
     frog.style.left = parseInt(cangeVal) + mov + `px`;
     mov++;
+    document.querySelector("#frogImg").src = frugHopRight[count];
   } else if (directs === "left") {
     frog.style.left = parseInt(cangeVal) - mov + `px`;
     mov++;
+    document.querySelector("#frogImg").src = frugHopLeft[count];
   } else if (directs === "up") {
+    console.log("here");
     frog.style.top = parseInt(cangeVal) - mov + `px`;
     mov++;
+    document.querySelector("#frogImg").src = frugHopUp[count];
+  }
+  if(mov%10 === 0){
+    count++;
+    console.log(count);
   }
 }
 //need to add one for the cars to move the other way
@@ -176,11 +196,6 @@ function myMoveTree(enm, id, posistion, speed) {
       enm.style.width = 150 + "px";
       logLength = 150;
     }
-    //else if(pos <= 0 && pos >= -149){
-    //   enm.style.width = logLength + "px";
-    //   pos--;
-    //   logLength--;
-    // }
     else {
       pos--;
       enm.style.left = pos + "px";
@@ -191,7 +206,6 @@ function myMoveTree(enm, id, posistion, speed) {
 
 // Move row two of trees left to right
 function myMoveBigTreeL(enm, id, posistion, speed, startId, offesetL) {
-  //console.log(enm);
   let pos = posistion;
   clearInterval(id);
   id = setInterval(Drive, speed);
@@ -217,13 +231,15 @@ function detect(en) {
       parseInt(frog.offsetLeft) >= en.offsetLeft
     ) {
       alive = false;
+      document.querySelector("#frogImg").src = "../images/death.png";
+
       render();
-      //console.log("Front hit");
     } else if (
       parseInt(frog.offsetLeft) + 50 === parseInt(en.offsetLeft) + 50 ||
       parseInt(frog.offsetLeft) === parseInt(en.offsetLeft) + 50
     ) {
       alive = false;
+      document.querySelector("#frogImg").src = "../images/death.png";
       render();
     }
   }
@@ -231,7 +247,6 @@ function detect(en) {
 
 //detection function for tress moving from left to right
 function detectOnTreeL(en, offSet) {
-  // if (frog.offsetTop > 37 && frog.offsetTop < 133) {
   if (
     frog.offsetTop >= en.offsetTop &&
     frog.offsetTop <= parseInt(en.offsetTop) + 49
@@ -240,19 +255,15 @@ function detectOnTreeL(en, offSet) {
       parseInt(frog.offsetLeft + offSet) >= en.offsetLeft &&
       parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 150)
     ) {
-      console.log("first");
     } else {
-      console.log("which is first");
-      // alive = false;
-      // render();
+      alive = false;
+      render();
     }
   }
 }
 
-//dtection function for trees moving from rigt to left so frogger can live
+//detection function for trees moving from rigt to left so frogger can live
 function detectOnTree(en) {
-  //myMoveTree(frog, iD,this.posistion,this.speed);
-  // if (frog.offsetTop > 37 && frog.offsetTop < 133) {
   if (
     frog.offsetTop >= en.offsetTop &&
     frog.offsetTop <= parseInt(en.offsetTop) + 49
@@ -261,9 +272,6 @@ function detectOnTree(en) {
       parseInt(frog.offsetLeft) > en.offsetLeft &&
       parseInt(frog.offsetLeft) < parseInt(en.offsetLeft + 150)
     ) {
-      //tree movement almost achieved??????
-      //myMoveTreeFrog(frog)
-      //console.log("on tree");
     } else {
       console.log("you drowned");
       alive = false;

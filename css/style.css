@@ -32,7 +32,7 @@ body{
 }
 #frog{
     height: 50px; 
-    width: 60px;
+    width: 50px;
     top: 0px;
     left: 300px;
     color: aliceblue;
@@ -42,7 +42,7 @@ body{
 
 #frog > img{
     height: auto;
-    width: 50px;
+    width: auto;
 }
 #stats{
     height: 50px;
@@ -65,7 +65,7 @@ body{
     left: 500px;
     color: aliceblue;
     position: relative;
-    z-index: 89;
+    z-index: 91;
 }
 #enemy2{
     height: 50px;
@@ -74,7 +74,7 @@ body{
     left: 500px;
     color: aliceblue;
     position: relative;
-    z-index: 89;
+    z-index: 91;
 }
 #enemy3{
     height: 50px;
@@ -83,7 +83,7 @@ body{
     left: 500px;
     color: aliceblue;
     position: relative;
-    z-index: 80;
+    z-index: 91;
 }
 #enemy4{
     height: 50px;
@@ -92,7 +92,7 @@ body{
     left: 500px;
     color: aliceblue;
     position: relative;
-    z-index: 80;
+    z-index: 91;
 }
 
 
