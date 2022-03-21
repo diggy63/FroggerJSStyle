@@ -49,6 +49,7 @@ body{
     width: auto;
 }
 #stats{
+    display: flex;
     height: 100px;
     background-color: darkgray;
 }
