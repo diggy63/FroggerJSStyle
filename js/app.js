@@ -17,6 +17,7 @@ const startBtn = document.querySelector("#startButton");
 const winTotal = document.querySelector("#winCount");
 const loseTotal = document.querySelector("#loseCount");
 const screenHieght = screen.width;
+let hopSpeed = 7;
 let phoneConstant = 1;
 let reset = false;
 let winCounter = 0;
@@ -27,7 +28,7 @@ let alive = true;
 let win = false;
 let mov = 1;
 let iD = null;
-let splashId = null;
+let splashWinId = null;
 let idEnm = null;
 let idEnm1 = null;
 let idEnm2 = null;
@@ -98,12 +99,15 @@ startBtn.addEventListener("click", init);
 
 //restarts Game
 function init() {
-  if(roadOne.clientHeight === 30){
-    phoneConstant = 3/5;
+  if (roadOne.clientHeight === 30) {
+    phoneConstant = 3 / 5;
     //console.log(phoneConstant);
   }
   reset = true;
   document.querySelector("#frogImg").src = frogTurn.down;
+  //This setTimeout lets the reset = true be read by all the setInterval loops
+  //and gives them time to get to there clear postition before assigning 
+  //new random values. So they wont glitch out
   setTimeout(function () {
     count = 0;
     drowned = false;
@@ -116,18 +120,14 @@ function init() {
     randomCarTree();
     document.addEventListener("keydown", moveFrg);
   }, 100);
-  //console.log(roadOne.clientHeight);
-  //console.log(phoneConstant);
-  // Needs a clear function so that it works better
-  // randomCarTree();
-  //display.innerHTML = "Let's Play Frogger"
 }
 
 //renders Lose or win for right now
 function render() {
+  
   //document.addEventListener("keydown", moveFrg);
   if (alive === false) {
-    loseCounter ++;
+    loseCounter++;
     midDisplay.innerHTML = "You Lost";
     loseTotal.innerHTML = loseCounter + "";
     return;
@@ -135,11 +135,13 @@ function render() {
   if (win === true) {
     midDisplay.innerHTML = "You are the Best, ";
     winCounter++;
+    winAnimation();
     winTotal.innerHTML = winCounter + ``;
     return;
   }
   document.addEventListener("keydown", moveFrg);
   count = 0;
+  checkWin();
 }
 
 //Randomizes cars and Tree Positions before the game starts for 'unqiue' games
@@ -167,7 +169,6 @@ function moveFrg(e) {
   //this remove keystokes being read so that you dont ultimate speed
   document.removeEventListener("keydown", moveFrg, false);
   mov = 1;
-  let hopSpeed = 7;
 
   //depending on which keystroke you hit its runs a setInterval thats "hops" to
   //its location
@@ -195,12 +196,6 @@ function moveFrg(e) {
 function frgHop(directs, cangeVal) {
   //if(alive = false){
   if (mov === 50) {
-    if (frog.offsetTop >= winCon.offsetTop - 5) {
-      win = true;
-      clearInterval(iD);
-      render();
-      return;
-    }
     clearInterval(iD);
     render();
   }
@@ -228,9 +223,6 @@ function frgHop(directs, cangeVal) {
     count++;
   }
 }
-
-
-
 
 //need to add one for the cars to move the other way
 //moves ennemy/car accross screen right to Left
@@ -298,7 +290,7 @@ function myMoveBigTreeL(enm, id, posistion, speed, startId, offesetL) {
 
 //enemy dectect function to see if the car hit the frog. If frog is hit it changes into a death symbol and you lose ability to move.
 function detect(en) {
-  if(alive === false){
+  if (alive === false) {
     return;
   }
   if (
@@ -319,7 +311,7 @@ function detect(en) {
 
 //detection function for tress moving from left to right
 function detectOnTreeL(en, offSet, id) {
-  if(alive === false){
+  if (alive === false) {
     return;
   }
   if (
@@ -330,7 +322,7 @@ function detectOnTreeL(en, offSet, id) {
       parseInt(frog.offsetLeft + offSet) >= en.offsetLeft &&
       parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 150)
     ) {
-      frog.style.left = (parseInt(frog.style.left) + 1) +`px` ;
+      frog.style.left = parseInt(frog.style.left) + 1 + `px`;
     } else {
       clearInterval(id);
       drowned === true;
@@ -344,7 +336,7 @@ function detectOnTreeL(en, offSet, id) {
 
 //detection function for trees moving from rigt to left so frogger can live
 function detectOnTree(en, id) {
-  if(alive === false){
+  if (alive === false) {
     return;
   }
   if (
@@ -355,8 +347,7 @@ function detectOnTree(en, id) {
       parseInt(frog.offsetLeft) > en.offsetLeft &&
       parseInt(frog.offsetLeft) < parseInt(en.offsetLeft + 150)
     ) {
-      frog.style.left = (parseInt(frog.style.left) - 1) +`px` ;
-
+      frog.style.left = parseInt(frog.style.left) - 1 + `px`;
     } else {
       clearInterval(id);
       drowned === true;
@@ -368,16 +359,71 @@ function detectOnTree(en, id) {
   }
 }
 
+// animation when the frog falls into the water. Runs for 7 seconds then stops
 function splashAnimation() {
   let ani = 0;
-  clearInterval(splashId);
-  splashId = setInterval(slpashA, 100);
+  clearInterval(splashWinId);
+  splashWinId = setInterval(slpashA, 100);
   function slpashA() {
     if (ani <= 7) {
       document.querySelector("#frogImg").src = splashAni[ani];
       ani++;
     } else {
-      clearInterval(splashId);
+      clearInterval(splashWinId);
+    }
   }
 }
+
+//makes frogger jump back and forth when he Wins
+function winAnimation() {
+  //centerFrogger();
+  console.log("here");
+  let ani = 0;
+  let switchI = true;
+  clearInterval(splashWinId);
+  splashWinId = setInterval(winA, 100);
+
+  function winA() {
+    if (reset === true) {
+      clearInterval(splashWinId);
+    }
+    if (switchI) {
+      if (ani <= 4) {
+        document.querySelector("#frogImg").src = frugHopLeft[ani];
+        ani++;
+      } else {
+        switchI = false;
+        ani = 0;
+      }
+    } else if (switchI === false) {
+      if (ani <= 4) {
+        document.querySelector("#frogImg").src = frugHopRight[ani];
+        ani++;
+      } else {
+        switchI = true;
+        ani = 0;
+      }
+    }
+  }
+}
+
+
+function centerFrogger() {
+  if(parseInt(frog.style.left) > 250){
+    document.querySelector("#frogImg").src = frogTurn.left;
+    iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
+    console.log("left");
+  }else if(parseInt(frog.style.left) < 250){
+    document.querySelector("#frogImg").src = frogTurn.right;
+    iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
+    console.log("left");
+  }
+}
+
+function checkWin() {
+  if (frog.offsetTop >= winCon.offsetTop - 5) {
+    console.log("win check");
+    win = true;
+    render();
+  }
 }
