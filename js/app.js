@@ -4,6 +4,9 @@ const plunckedSound = new Audio("audio/sound-frogger-squash.wav");
 const themeSong = new Audio("audio/froggerTheme.mp3");
 const winSound = new Audio("audio/win sound 2-1.wav");
 //audio.volume = 0.2;
+const btnToStart = document.querySelector("#displayNone");
+const wrapper = document.querySelector("#wrapper");
+const startScreen = document.querySelector("#startScreen");
 
 const testRoad = document.querySelector(".road")
 const frog = document.querySelector("#frog");
@@ -110,11 +113,21 @@ const splashAni = [
   "../images/BLANK_ICON.png",
 ];
 
-init();
 startBtn.addEventListener("click", init);
-//testBtn.addEventListener("click", createNewCar);
-//themeSong.play();
+btnToStart.addEventListener("click", changeDisplay);
+// testBtn.addEventListener("click", createNewCar);
 
+
+
+
+//function that starts the Game and clears the Screen
+ function changeDisplay(){
+  startScreen.style.display = "none";
+   wrapper.style.display = "block";
+   init();
+   //themeSong.play();
+
+ }
 //restarts Game
 function init() {
   goFroggerScript();
@@ -225,6 +238,7 @@ function moveFrg(e) {
 //function that gives frog smooth hop
 function frgHop(directs, cangeVal) {
   if (mov === 50) {
+    console.log(frog.offsetTop);
     clearInterval(iD);
     render();
   }
@@ -263,8 +277,7 @@ function myMoveEnm(enm, id, posistion, speed) {
   function Drive() {
     //console.log(roadOne)
     if (pos == -100) {
-      enm.style.left = `600px`;
-      pos = 600;
+      pos = 550;
       carLength = 50;
       enm.style.width = 50 + "px";
     } else if (reset === true) {
@@ -319,13 +332,14 @@ function moveTreeLR(enm, id, posistion, speed, startId, offesetL) {
 
 //enemy dectect function to see if the car hit the frog. If frog is hit it changes into a death symbol and you lose ability to move.
 function detect(en) {
+  
   if (alive === false) {
     return;
   }
   if (
     frog.offsetTop >= en.offsetTop &&
-    frog.offsetTop <= parseInt(en.offsetTop) + 49
-  ) {
+    frog.offsetTop <= (parseInt(en.offsetTop) + 49)
+  ) {console.log("here");
     if (
       parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 110) &&
       parseInt(frog.offsetLeft) >= en.offsetLeft
@@ -478,11 +492,16 @@ function createKeyboardListen(){
 }
 // function that creates new care on a new Div. Test function for maybe future
 // randomness if i would like to add that.
+
+
+
 // function createNewCar (){
+//   ranCarOne = Math.floor(Math.random() * 600);
 //   let newDiv = document.createElement(`div`);
+//   ranSpeed = Math.floor((Math.random() * 5));
 //   newDiv.className = "carClass";
 //   newDiv.innerHTML = '<img src="images/GreenCar.png" alt="Green Car in fourth row" />';
 //   testRoad.append(newDiv);
-//   myMoveEnm(newDiv, testId, 0, 5);
+//   myMoveEnm(newDiv, testId, 0, ranSpeed);
 
 // }
