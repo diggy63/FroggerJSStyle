@@ -40,12 +40,15 @@ let treeStringL = [log2, log4];
 let treeIdL = [idLog2, idLog4];
 
 console.log(winTotal);
+//object with static positions for the frogger when he turns
 const frogTurn = {
   down: "../images/frogStatic.png",
   right: "../images/frogStaticRight.png",
   left: "../images/frogStaticLeft.png",
   up: "../images/frogStaticUp.png",
 };
+
+//all the hop animation image array
 const frugHopDown = [
   "../images/frogStatic.png",
   "../images/frogJumpDown1.png",
@@ -74,6 +77,7 @@ const frugHopRight = [
   "../images/frogJumpRight3.png",
   "../images/frogJumpRight4.png",
 ];
+//spalsh animation array
 const splashAni = [
   "../images/splash.png",
   "../images/splash 2.png",
@@ -91,8 +95,9 @@ startBtn.addEventListener("click", init);
 //restarts Game
 function init() {
   reset = true;
-
+  document.querySelector("#frogImg").src = frogTurn.down;
   setTimeout(function () {
+    count = 0;
     drowned = false;
     frog.style.top = `0px`;
     frog.style.left = `250px`;
