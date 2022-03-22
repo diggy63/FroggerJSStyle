@@ -1,7 +1,15 @@
+const hopSound = new Audio("audio/SFX_Jump_07.wav");
+const spalshSound = new Audio("audio/sound-frogger-plunk.wav");
+const plunckedSound = new Audio("audio/sound-frogger-squash.wav");
+const themeSong = new Audio("audio/froggerTheme.mp3");
+const winSound = new Audio("audio/win sound 2-1.wav");
+//audio.volume = 0.2;
+
+const testRoad = document.querySelector(".road")
 const frog = document.querySelector("#frog");
 const midDisplay = document.querySelector("#midStats");
 const winCon = document.querySelector("#finArea");
-const roadOne = document.querySelector("#road");
+const roadOne = document.querySelector(".road");
 const gameAr = document.querySelector("#gameArea");
 const frogImg = document.querySelector("#frogImg").src;
 const enmElOne = document.querySelector("#enemy");
@@ -14,6 +22,7 @@ const log2 = document.querySelector("#log2");
 const log3 = document.querySelector("#log3");
 const log4 = document.querySelector("#log4");
 const startBtn = document.querySelector("#startButton");
+const testBtn = document.querySelector("#testerButton")
 const winTotal = document.querySelector("#winCount");
 const loseTotal = document.querySelector("#loseCount");
 const screenHieght = screen.width;
@@ -23,10 +32,12 @@ let reset = false;
 let winCounter = 0;
 let loseCounter = 0;
 let count = 0;
+let onTree = false;
 let drowned = false;
 let alive = true;
 let win = false;
 let mov = 1;
+let displayId = null;
 let iD = null;
 let splashWinId = null;
 let idEnm = null;
@@ -37,6 +48,7 @@ let idLog = null;
 let idLog2 = null;
 let idLog3 = null;
 let idLog4 = null;
+let testId = null;
 let carString = [enmElOne, enmElTwo, enmElThree, enmElFour];
 let carId = [idEnm, idEnm1, idEnm2, idEnm3];
 let treeStringR = [log1, log3];
@@ -44,6 +56,10 @@ let treeIdR = [idLog, idLog3];
 let treeStringL = [log2, log4];
 let treeIdL = [idLog2, idLog4];
 // console.dir(roadOne.clientHeight);
+
+
+
+const goFrogDisplay = ["GO","FROGGER","GO"];
 
 //object with static positions for the frogger when he turns
 const frogTurn = {
@@ -96,9 +112,14 @@ const splashAni = [
 
 init();
 startBtn.addEventListener("click", init);
+//testBtn.addEventListener("click", createNewCar);
+//themeSong.play();
 
 //restarts Game
 function init() {
+  goFroggerScript();
+  //this function checks to see if the viewpoint is for a phone
+  //I need to use this because I am using relative display for my game area
   if (roadOne.clientHeight === 30) {
     phoneConstant = 3 / 5;
     //console.log(phoneConstant);
@@ -122,20 +143,21 @@ function init() {
   }, 100);
 }
 
-//renders Lose or win for right now
+//renders Lose or win
 function render() {
-  
-  //document.addEventListener("keydown", moveFrg);
   if (alive === false) {
+    clearInterval(displayId);
     loseCounter++;
     midDisplay.innerHTML = "You Lost";
     loseTotal.innerHTML = loseCounter + "";
     return;
   }
   if (win === true) {
-    midDisplay.innerHTML = "You are the Best, ";
+    clearInterval(displayId);
+    midDisplay.innerHTML = "You Win. Press Start to Replay";
     winCounter++;
     winAnimation();
+    winSound.play();
     winTotal.innerHTML = winCounter + ``;
     return;
   }
@@ -147,26 +169,26 @@ function render() {
 //Randomizes cars and Tree Positions before the game starts for 'unqiue' games
 function randomCarTree() {
   for (i = 0; i < 4; i++) {
-    ranSpeed = Math.floor(Math.random() * 5) + 2;
+    ranSpeed = Math.floor((Math.random() * 5) + 2 - winCounter);
     ranCarOne = Math.floor(Math.random() * 600);
     carString[i].style.left = ranCarOne + "px";
     myMoveEnm(carString[i], carId[i], ranCarOne, ranSpeed);
   }
   for (i = 0; i < 2; i++) {
-    ranSpeed = Math.floor(Math.random() * 5) + 8;
+    ranSpeed = Math.floor((Math.random() * 5) + 8 - winCounter);
     ranTreePlace = Math.floor(Math.random() * 550);
-    myMoveTree(treeStringR[i], treeIdR[i], ranTreePlace, ranSpeed);
+    moveTreeRL(treeStringR[i], treeIdR[i], ranTreePlace, ranSpeed);
   }
 
-  myMoveBigTreeL(treeStringL[0], treeIdL[0], 100, 15, -150, 20);
+  moveTreeLR(treeStringL[0], treeIdL[0], 100, 15, -150, 20);
   //cannot do two logs yet the dectction only works for one row
   //myMoveBigTreeL(treeStringL[1], treeIdL[1], 300, 15, -300, 20);
 }
 
-//function that moves frog
+//function that moves frog listen to the Keystoke of the keyboard then send the move direction to my movement function
 function moveFrg(e) {
-  //console.log("here");
-  //this remove keystokes being read so that you dont ultimate speed
+
+  //this remove keystokes being read so that you dont gain ultimate speed
   document.removeEventListener("keydown", moveFrg, false);
   mov = 1;
 
@@ -176,25 +198,32 @@ function moveFrg(e) {
     document.querySelector("#frogImg").src = frogTurn.down;
     iD = setInterval(frgHop, hopSpeed, "down", frog.style.top);
   } else if (e.key === "d") {
+    if (frog.style.left != `500px`) {
     document.querySelector("#frogImg").src = frogTurn.right;
     iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
+    }else{
+      createKeyboardListen();
+    }
     // frog.style.left = `${parseInt(frog.style.left) + mov}px`;
   } else if (e.key === "a") {
+    if (frog.style.left != `0px`) {
     document.querySelector("#frogImg").src = frogTurn.left;
     iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
+    }else{
+      createKeyboardListen();
+    }
   } else if (e.key === "w") {
     document.querySelector("#frogImg").src = frogTurn.up;
     if (frog.style.top != `0px`) {
       iD = setInterval(frgHop, hopSpeed, "up", frog.style.top);
     } else {
-      document.addEventListener("keydown", moveFrg);
+      createKeyboardListen();
     }
   }
 }
 
 //function that gives frog smooth hop
 function frgHop(directs, cangeVal) {
-  //if(alive = false){
   if (mov === 50) {
     clearInterval(iD);
     render();
@@ -224,7 +253,7 @@ function frgHop(directs, cangeVal) {
   }
 }
 
-//need to add one for the cars to move the other way
+//need to add one for the cars to move the other way?
 //moves ennemy/car accross screen right to Left
 function myMoveEnm(enm, id, posistion, speed) {
   let carLength = 49;
@@ -249,7 +278,7 @@ function myMoveEnm(enm, id, posistion, speed) {
 }
 
 //moves tree accross screen right to left
-function myMoveTree(enm, id, posistion, speed) {
+function moveTreeRL(enm, id, posistion, speed) {
   let logLength = 150;
 
   let pos = posistion;
@@ -271,7 +300,7 @@ function myMoveTree(enm, id, posistion, speed) {
 }
 
 // Move row two of trees left to right
-function myMoveBigTreeL(enm, id, posistion, speed, startId, offesetL) {
+function moveTreeLR(enm, id, posistion, speed, startId, offesetL) {
   let pos = posistion;
   clearInterval(id);
   id = setInterval(Drive, speed);
@@ -304,6 +333,7 @@ function detect(en) {
       alive = false;
       document.querySelector("#frogImg").src = "../images/death.png";
       document.removeEventListener("keydown", moveFrg, false);
+      plunckedSound.play();
       render();
     }
   }
@@ -322,6 +352,7 @@ function detectOnTreeL(en, offSet, id) {
       parseInt(frog.offsetLeft + offSet) >= en.offsetLeft &&
       parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 150)
     ) {
+      onTree = true;
       frog.style.left = parseInt(frog.style.left) + 1 + `px`;
     } else {
       clearInterval(id);
@@ -346,7 +377,7 @@ function detectOnTree(en, id) {
     if (
       parseInt(frog.offsetLeft) > en.offsetLeft &&
       parseInt(frog.offsetLeft) < parseInt(en.offsetLeft + 150)
-    ) {
+    ) { onTree = true
       frog.style.left = parseInt(frog.style.left) - 1 + `px`;
     } else {
       clearInterval(id);
@@ -361,6 +392,7 @@ function detectOnTree(en, id) {
 
 // animation when the frog falls into the water. Runs for 7 seconds then stops
 function splashAnimation() {
+  spalshSound.play("splash");
   let ani = 0;
   clearInterval(splashWinId);
   splashWinId = setInterval(slpashA, 100);
@@ -377,7 +409,6 @@ function splashAnimation() {
 //makes frogger jump back and forth when he Wins
 function winAnimation() {
   //centerFrogger();
-  console.log("here");
   let ani = 0;
   let switchI = true;
   clearInterval(splashWinId);
@@ -412,14 +443,12 @@ function centerFrogger() {
   if(parseInt(frog.style.left) > 250){
     document.querySelector("#frogImg").src = frogTurn.left;
     iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
-    console.log("left");
   }else if(parseInt(frog.style.left) < 250){
     document.querySelector("#frogImg").src = frogTurn.right;
     iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
-    console.log("left");
   }
 }
-
+//specific function to check for the win con of the game
 function checkWin() {
   if (frog.offsetTop >= winCon.offsetTop - 5) {
     console.log("win check");
@@ -427,3 +456,33 @@ function checkWin() {
     render();
   }
 }
+
+//Run the go Frogger go chant in the display screen while you play the game
+function goFroggerScript()  {
+  midDisplay.innerHTML = ``;
+  let anima = 0;
+  clearInterval(displayId);
+  displayId = setInterval(slpashA, 1000);
+  function slpashA() {
+    if (anima <= 2) {
+      midDisplay.innerHTML = midDisplay.innerHTML + goFrogDisplay[anima]  + ` `;
+      anima++;
+    } else {
+      midDisplay.innerHTML = ``;
+      anima = 0;
+    }
+  }
+}
+function createKeyboardListen(){
+  document.addEventListener("keydown", moveFrg);
+}
+// function that creates new care on a new Div. Test function for maybe future
+// randomness if i would like to add that.
+// function createNewCar (){
+//   let newDiv = document.createElement(`div`);
+//   newDiv.className = "carClass";
+//   newDiv.innerHTML = '<img src="images/GreenCar.png" alt="Green Car in fourth row" />';
+//   testRoad.append(newDiv);
+//   myMoveEnm(newDiv, testId, 0, 5);
+
+// }

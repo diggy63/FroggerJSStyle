@@ -1,267 +1,243 @@
-body{
-    display: flex;
+body {
+  display: flex;
+  height: 100vh;
+  box-sizing: border-box;
+  flex-direction: column;
+  max-width: 900px;
+  text-align: center;
+  margin: auto;
+  align-items: center;
+  /* background-color: rgb(196, 194, 194); */
+  /* z-index: auto; */
+}
+
+#wrapper {
+    background-color: rgb(97, 97, 97);
     height: 100vh;
+    max-width: 900px;
     border-radius: 100px;
     border-style: solid;
-    box-sizing: border-box;
-    flex-direction: column;
-    max-width: 900px;
-    text-align: center;
-    margin: auto;
-    background-color: aliceblue;
-    /* background-color: rgb(196, 194, 194); */
-    z-index: auto;
-}
-#gameBody{
-    max-width: 1000px;
-    display: flex;
-    justify-content: center;
+  }
 
-}
-/* #wrapper{
-    height:100vh;
-    width: 100vw;
-    background-color: rgb(196, 194, 194);
-} */
-#header{
-    border-radius: 15px;
-    border-style: solid;
-    margin: 30px auto;
-    font-size: 40px;
-    text-align: center;
-    width: 400px;
-}
-#areaB{
-    text-align: center;
-}
-#frog{
-    height: 50px; 
-    width: 50px;
-    top: 0px;
-    left: 300px;
-    color: aliceblue;
-    position: relative;
-    z-index:90;
+#gamePlayArea{
+display: flex;
+flex-direction: column;
 }
 
-#frog > img{
-    height: auto;
-    width: auto;
+#gameBody {
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
 }
-#stats{
-    display: flex;
-    height: 100px;
-    background-color: darkgray;
-    justify-content: space-evenly;
+#header {
+  border-radius: 15px;
+  border-style: solid;
+  margin: 30px auto;
+  font-size: 40px;
+  text-align: center;
+  width: 400px;
 }
-#gameArea{
-    margin-top: 30px;
-    margin-left: 0px;
-    height: 600px;
-    width: 800px;
-    border-style: solid;
-    border-radius: 10px;
-    z-index:100;
+#areaB {
+  text-align: center;
 }
-
-#enemy{
-    height: 50px;
-    width: 50px;
-    top: 0px;
-    left: 500px;
-    color: aliceblue;
-    position: relative;
-    z-index: 91;
-}
-#enemy2{
-    height: 50px;
-    width: 50px;
-    top: 0px;
-    left: 500px;
-    color: aliceblue;
-    position: relative;
-    z-index: 91;
-}
-#enemy3{
-    height: 50px;
-    width: 50px;
-    top: 0px;
-    left: 500px;
-    color: aliceblue;
-    position: relative;
-    z-index: 91;
-}
-#enemy4{
-    height: 50px;
-    width: 50px;
-    top: 0px;
-    left: 500px;
-    color: aliceblue;
-    position: relative;
-    z-index: 91;
+#frog {
+  height: 50px;
+  width: 50px;
+  top: 0px;
+  left: 300px;
+  color: aliceblue;
+  position: relative;
+  z-index: 90;
 }
 
+#frog > img {
+  height: auto;
+  width: auto;
+}
+#stats {
+  display: flex;
+  height: 100px;
+  background-color: darkgray;
+  justify-content: space-evenly;
+}
+#gameArea {
+  margin-top: 30px;
+  margin-left: 0px;
+  height: 600px;
+  width: 800px;
+  border-style: solid;
+  border-radius: 10px;
+  z-index: 100;
+}
 
-#road{
-    height: 50px;
-    /* border-style: dashed;
+#enemy, #enemy2, #enemy3, #enemy4 {
+  height: 50px;
+  width: 50px;
+  top: 0px;
+  left: 500px;
+  color: aliceblue;
+  position: relative;
+  z-index: 91;
+}
+
+.road {
+    display: inline-block;
+  height: 50px;
+  /* border-style: dashed;
     border-left: 0px;
     border-right: 0px;
     border-width: 1px;
     border-color: aliceblue; */
-    background-image: url("../images/road.png");
-    background-color: rgb(0,0,0);
+  background-image: url("../images/road.png");
+  background-color: rgb(0, 0, 0);
 }
 
-#startArea{
-    background-image: url("../images/grass.png");
-    height: 50px;
-    background-color: rgb(134,255,0);
+#startArea, #safeArea {
+  background-image: url("../images/grass.png");
+  height: 50px;
+  background-color: rgb(134, 255, 0);
 }
 
-#safeArea{
-    background-image: url("../images/grass.png");
-    height: 50px;
-    background-color: rgb(134,255,0);
+#river1, #river2, #river3 {
+  display: flex;
+  height: 50px;
+  background-image: url("../images/water.png");
+  background-color: rgb(51, 255, 204);
 }
 
-#river1{
-    display: flex;
-    height: 50px;
-    background-image: url("../images/water.png");
-    background-color: rgb(51,255,204);
-}
-#river2{
-    display: flex;
-    background-image: url("../images/water.png");
-    height: 50px;
-    background-color: rgb(51,255,204);
-}
-#river3{
-    background-image: url("../images/water.png");
-    height: 50px;
-    background-color: rgb(51,255,204);
+#finArea {
+  background-image: url("../images/grass.png");
+  height: 50px;
+  z-index: 0;
+  background-color: rgb(134, 255, 0);
 }
 
-
-#finArea{
-    background-image: url("../images/grass.png");
-    height: 50px;
-    z-index: 0;
-    background-color: rgb(134,255,0);
+#log {
+  height: 50px;
+  width: 150px;
+  top: 0px;
+  left: 500px;
+  color: aliceblue;
+  position: relative;
+  z-index: 80;
 }
-
-#log{
-    height: 50px;
-    width: 150px;
-    top: 0px;
-    left: 500px;
-    color: aliceblue;
-    position: relative;
-    z-index: 80;
+#log2 {
+  height: 50px;
+  width: 150px;
+  top: 0px;
+  left: -165px;
+  color: aliceblue;
+  position: relative;
 }
-#log2{
-    height: 50px;
-    width: 150px;
-    top: 0px;
-    left: -165px;
-    color: aliceblue;
-    position: relative;
+#log3 {
+  height: 50px;
+  width: 150px;
+  top: 0px;
+  left: 500px;
+  color: aliceblue;
+  position: relative;
 }
-#log3{
-    height: 50px;
-    width: 150px;
-    top: 0px;
-    left: 500px;
-    color: aliceblue;
-    position: relative;
+#log4 {
+  height: 50px;
+  width: 150px;
+  top: 0px;
+  left: -315px;
+  color: aliceblue;
+  position: relative;
 }
-#log4{
-    height: 50px;
-    width: 150px;
-    top: 0px;
-    left: -315px;
-    color: aliceblue;
-    position: relative;
-}
-#smlLog{
-    height: 50px;
-    width: 100px;
-    top: 0px;
-    left: 500px;
-    background-color: rgb(97, 54, 0);
-    color: aliceblue;
-    position: relative;
-}
-
 
 img {
-    height: 50px;
+  height: 50px;
 }
 
 /* #testArea{
     background-color: black;
     height: 100px;
 } */
-#hidder{
-    height: 650px;
-    width: 250px;
-    background-color: aliceblue;
-    /* background-color: black; */
-    z-index: 999;
+#hidder {
+    background-color: rgb(97, 97, 97);
+  height: 650px;
+  width: 250px;
+  /* background-color: black; */
+  z-index: 980;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+#startButton, #testerButton {
+  margin: 20px auto;
+  border-radius: 5px;
+  border-style: solid;
+  width: 80px;
+  height: 20px;
+}
+#midStats {
+    color: rgb(55, 55, 55);
+  font-size: 30px;
+  width: 70%;
+  border-color: black;
+  border-style: solid;
+  padding-top: 20px;
 }
 
-#startButton{
-    margin: 20px auto;
-    border-radius: 5px;
-    border-style: solid;
-    width: 80px;
-    height: 20px;
+#winCount, #loseCount {
+    font-size: 36px;
+    color: rgb(55, 55, 55);
 }
-#midStats{
-    width: 70%;
-    border-style: solid;
-    
-}
-#rightStats{
-    width: 15%;
-    border-style: solid;
-    
-}
-#leftStats{
-    width: 15%;
-    border-style: solid;
-    
+#rightStats, #leftStats {
+  width: 15%;
+  border-style: solid;
 }
 
-#winLoseTally{
-    font-size: 30px;
+#winLoseTally {
+  font-size: 36px;
+  color: rgb(55, 55, 55);
+}
+
+.carClass{
+    height: 50px;
+  width: 50px;
+  top: 0px;
+  left: 500px;
+  color: aliceblue;
+  position: relative;
+  z-index: 91;
+  background-image: url("..images/yellow car.png");
+  z-index: 999999;
 }
 
 /* 768px is a common "breakpoint" width for tablets */
 @media only screen and (max-height: 800px) {
-    #header{
-        display: none;
-}
-#hidder{
-    margin-top: 80px;;
+  #header {
+    display: none;
+  }
+  #hidder {
+    margin-top: 80px;
     height: 550px;
     width: 250px;
-}
+  }
+  #gameBody {
+    margin-top: 40px;
+  }
 }
 
 @media only screen and (max-width: 412px) {
-    /* #gameBody{
+  /* #gameBody{
         height: 300px;
     
     } */
-    #road, #startArea, #river1, #river2, #river3, #finArea, #safeArea{
-        height: 30px;
-    }
-    img{
-        height: 60%;
-    }
-    #stats{
-        height: 60px;
-    }
+  #road,
+  #startArea,
+  #river1,
+  #river2,
+  #river3,
+  #finArea,
+  #safeArea {
+    height: 30px;
+  }
+  img {
+    height: 60%;
+  }
+  #stats {
+    height: 60px;
+  }
 }
