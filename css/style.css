@@ -207,6 +207,7 @@ img {
     height: 650px;
     width: 250px;
     background-color: aliceblue;
+    /* background-color: black; */
     z-index: 999;
 }
 
@@ -231,4 +232,36 @@ img {
     width: 15%;
     border-style: solid;
     
+}
+
+#winLoseTally{
+    font-size: 30px;
+}
+
+/* 768px is a common "breakpoint" width for tablets */
+@media only screen and (max-height: 800px) {
+    #header{
+        display: none;
+}
+#hidder{
+    margin-top: 80px;;
+    height: 550px;
+    width: 250px;
+}
+}
+
+@media only screen and (max-width: 412px) {
+    /* #gameBody{
+        height: 300px;
+    
+    } */
+    #road, #startArea, #river1, #river2, #river3, #finArea, #safeArea{
+        height: 30px;
+    }
+    img{
+        height: 60%;
+    }
+    #stats{
+        height: 60px;
+    }
 }
