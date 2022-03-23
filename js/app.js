@@ -1,15 +1,20 @@
+
+//=============> Audio Constants <==========================================
 const hopSound = new Audio("audio/SFX_Jump_07.wav");
 const spalshSound = new Audio("audio/sound-frogger-plunk.wav");
 const plunckedSound = new Audio("audio/sound-frogger-squash.wav");
-const themeSong = new Audio("audio/froggerTheme.mp3");
-const winSound = new Audio("audio/win sound 2-1.wav");
+const theme = new Audio('audio/froggerTheme.mp3');
+theme.loop = true;
+theme.volume = 0.02;
+
+
 //audio.volume = 0.2;
+//=============> grabing everything we need from the Page <==================
 const btnToStart = document.querySelector("#displayNone");
 const wrapper = document.querySelector("#wrapper");
 const startScreen = document.querySelector("#startScreen");
 const frogImg = document.querySelector("#frogImg");
-
-const testRoad = document.querySelector(".road")
+const testRoad = document.querySelector(".road");
 const frog = document.querySelector("#frog");
 const midDisplay = document.querySelector("#midStats");
 const winCon = document.querySelector("#finArea");
@@ -25,10 +30,9 @@ const log2 = document.querySelector("#log2");
 const log3 = document.querySelector("#log3");
 const log4 = document.querySelector("#log4");
 const startBtn = document.querySelector("#startButton");
-const testBtn = document.querySelector("#testerButton")
+const testBtn = document.querySelector("#testerButton");
 const winTotal = document.querySelector("#winCount");
 const loseTotal = document.querySelector("#loseCount");
-const screenHieght = screen.width;
 let hopSpeed = 7;
 let phoneConstant = 1;
 let reset = false;
@@ -40,29 +44,25 @@ let drowned = false;
 let alive = true;
 let win = false;
 let mov = 1;
-let displayId = null;
-let iD = null;
-let splashWinId = null;
-let idEnm = null;
-let idEnm1 = null;
-let idEnm2 = null;
-let idEnm3 = null;
-let idLog = null;
-let idLog2 = null;
-let idLog3 = null;
-let idLog4 = null;
-let testId = null;
+let idEnm = null,
+  idEnm1 = null,
+  idEnm2 = null,
+  idEnm3 = null,
+  idLog = null,
+  idLog2 = null,
+  idLog3 = null,
+  idLog4 = null,
+  testId = null,
+  splashWinId = null,
+  iD = null,
+  displayId = null;
 let carString = [carOne, carTwo, carThree, carFour];
 let carId = [idEnm, idEnm1, idEnm2, idEnm3];
 let treeStringR = [log1, log3];
 let treeIdR = [idLog, idLog3];
 let treeStringL = [log2, log4];
 let treeIdL = [idLog2, idLog4];
-// console.dir(roadOne.clientHeight);
-
-
-
-const goFrogDisplay = ["GO","FROGGER","GO"];
+const goFrogDisplay = ["GO", "FROGGER", "GO"];
 
 //object with static positions for the frogger when he turns
 const frogTurn = {
@@ -117,17 +117,13 @@ startBtn.addEventListener("click", init);
 btnToStart.addEventListener("click", changeDisplay);
 // testBtn.addEventListener("click", createNewCar);
 
-
-
-
 //function that starts the Game and clears the Screen
- function changeDisplay(){
+function changeDisplay() {
   startScreen.style.display = "none";
-   wrapper.style.display = "block";
-   init();
-   //themeSong.play();
-
- }
+  wrapper.style.display = "block";
+  init();
+  theme.play();
+}
 //restarts Game
 function init() {
   goFroggerScript();
@@ -140,7 +136,7 @@ function init() {
   reset = true;
   document.querySelector("#frogImg").src = frogTurn.down;
   //This setTimeout lets the reset = true be read by all the setInterval loops
-  //and gives them time to get to there clear postition before assigning 
+  //and gives them time to get to there clear postition before assigning
   //new random values. So they wont glitch out
   setTimeout(function () {
     count = 0;
@@ -182,13 +178,13 @@ function render() {
 //Randomizes cars and Tree Positions before the game starts for 'unqiue' games
 function randomCarTree() {
   for (i = 0; i < 4; i++) {
-    ranSpeed = Math.floor((Math.random() * 5) + 2 - winCounter);
+    ranSpeed = Math.floor(Math.random() * 5 + 2 - winCounter);
     ranCarOne = Math.floor(Math.random() * 600);
     carString[i].style.left = ranCarOne + "px";
     myMoveEnm(carString[i], carId[i], ranCarOne, ranSpeed);
   }
   for (i = 0; i < 2; i++) {
-    ranSpeed = Math.floor((Math.random() * 5) + 8 - winCounter);
+    ranSpeed = Math.floor(Math.random() * 5 + 8 - winCounter);
     ranTreePlace = Math.floor(Math.random() * 550);
     moveTreeRL(treeStringR[i], treeIdR[i], ranTreePlace, ranSpeed);
   }
@@ -200,7 +196,6 @@ function randomCarTree() {
 
 //function that moves frog listen to the Keystoke of the keyboard then send the move direction to my movement function
 function moveFrg(e) {
-
   //this remove keystokes being read so that you dont gain ultimate speed
   document.removeEventListener("keydown", moveFrg, false);
   mov = 1;
@@ -212,16 +207,16 @@ function moveFrg(e) {
     iD = setInterval(frgHop, hopSpeed, "down", frog.style.top);
   } else if (e.key === "d") {
     if (frog.style.left != `500px`) {
-    frogImg.src = frogTurn.right;
-    iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
-    }else{
+      frogImg.src = frogTurn.right;
+      iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
+    } else {
       createKeyboardListen();
     }
   } else if (e.key === "a") {
     if (frog.style.left != `0px`) {
-    frogImg.src = frogTurn.left;
-    iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
-    }else{
+      frogImg.src = frogTurn.left;
+      iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
+    } else {
       createKeyboardListen();
     }
   } else if (e.key === "w") {
@@ -231,8 +226,8 @@ function moveFrg(e) {
     } else {
       createKeyboardListen();
     }
-  }else {
-    createKeyboardListen(); 
+  } else {
+    createKeyboardListen();
   }
 }
 
@@ -333,20 +328,20 @@ function moveTreeLR(enm, id, posistion, speed, startId, offesetL) {
 
 //enemy dectect function to see if the car hit the frog. If frog is hit it changes into a death symbol and you lose ability to move.
 function detect(en) {
-  
   if (alive === false) {
     return;
   }
   if (
     frog.offsetTop >= en.offsetTop &&
-    frog.offsetTop <= (parseInt(en.offsetTop) + 49)
-  ) {console.log("here");
+    frog.offsetTop <= parseInt(en.offsetTop) + 49
+  ) {
+    console.log("here");
     if (
       parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 110) &&
       parseInt(frog.offsetLeft) >= en.offsetLeft
     ) {
       alive = false;
-      document.querySelector("#frogImg").src = "../images/death.png";
+      frogImg.src = "../images/death.png";
       document.removeEventListener("keydown", moveFrg, false);
       plunckedSound.play();
       render();
@@ -392,7 +387,8 @@ function detectOnTree(en, id) {
     if (
       parseInt(frog.offsetLeft) > en.offsetLeft &&
       parseInt(frog.offsetLeft) < parseInt(en.offsetLeft + 150)
-    ) { onTree = true
+    ) {
+      onTree = true;
       frog.style.left = parseInt(frog.style.left) - 1 + `px`;
     } else {
       clearInterval(id);
@@ -413,7 +409,7 @@ function splashAnimation() {
   splashWinId = setInterval(slpashA, 100);
   function slpashA() {
     if (ani <= 7) {
-      document.querySelector("#frogImg").src = splashAni[ani];
+      frogImg.src = splashAni[ani];
       ani++;
     } else {
       clearInterval(splashWinId);
@@ -435,7 +431,7 @@ function winAnimation() {
     }
     if (switchI) {
       if (ani <= 4) {
-        document.querySelector("#frogImg").src = frugHopLeft[ani];
+        frogImg.src = frugHopLeft[ani];
         ani++;
       } else {
         switchI = false;
@@ -443,7 +439,7 @@ function winAnimation() {
       }
     } else if (switchI === false) {
       if (ani <= 4) {
-        document.querySelector("#frogImg").src = frugHopRight[ani];
+        frogImg.src = frugHopRight[ani];
         ani++;
       } else {
         switchI = true;
@@ -453,13 +449,12 @@ function winAnimation() {
   }
 }
 
-
 function centerFrogger() {
-  if(parseInt(frog.style.left) > 250){
-    document.querySelector("#frogImg").src = frogTurn.left;
+  if (parseInt(frog.style.left) > 250) {
+    frogImg.src = frogTurn.left;
     iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
-  }else if(parseInt(frog.style.left) < 250){
-    document.querySelector("#frogImg").src = frogTurn.right;
+  } else if (parseInt(frog.style.left) < 250) {
+    frogImg.src = frogTurn.right;
     iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
   }
 }
@@ -473,14 +468,14 @@ function checkWin() {
 }
 
 //Run the go Frogger go chant in the display screen while you play the game
-function goFroggerScript()  {
+function goFroggerScript() {
   midDisplay.innerHTML = ``;
   let anima = 0;
   clearInterval(displayId);
   displayId = setInterval(slpashA, 1000);
   function slpashA() {
     if (anima <= 2) {
-      midDisplay.innerHTML = midDisplay.innerHTML + goFrogDisplay[anima]  + ` `;
+      midDisplay.innerHTML = midDisplay.innerHTML + goFrogDisplay[anima] + ` `;
       anima++;
     } else {
       midDisplay.innerHTML = ``;
@@ -488,13 +483,13 @@ function goFroggerScript()  {
     }
   }
 }
-function createKeyboardListen(){
+
+//creates Listener to key strokes when you need your key strokes to  working
+function createKeyboardListen() {
   document.addEventListener("keydown", moveFrg);
 }
 // function that creates new care on a new Div. Test function for maybe future
 // randomness if i would like to add that.
-
-
 
 // function createNewCar (){
 //   ranCarOne = Math.floor(Math.random() * 600);
