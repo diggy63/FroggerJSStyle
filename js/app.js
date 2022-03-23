@@ -2,13 +2,12 @@
 //=============> Audio Constants <==========================================
 const hopSound = new Audio("audio/SFX_Jump_07.wav");
 const spalshSound = new Audio("audio/sound-frogger-plunk.wav");
+spalshSound.volume = .3;
 const plunckedSound = new Audio("audio/sound-frogger-squash.wav");
+plunckedSound.volume = .3;
 const theme = new Audio('audio/froggerTheme.mp3');
 theme.loop = true;
-theme.volume = 0.02;
-
-
-//audio.volume = 0.2;
+theme.volume = 0.04;
 //=============> grabing everything we need from the Page <==================
 const btnToStart = document.querySelector("#displayNone");
 const wrapper = document.querySelector("#wrapper");
@@ -44,6 +43,8 @@ let drowned = false;
 let alive = true;
 let win = false;
 let mov = 1;
+
+//this id values are for the multiple set intervals we need to run the game
 let idEnm = null,
   idEnm1 = null,
   idEnm2 = null,
@@ -122,8 +123,10 @@ function changeDisplay() {
   startScreen.style.display = "none";
   wrapper.style.display = "block";
   init();
-  theme.play();
+  //theme.play();
 }
+
+
 //restarts Game
 function init() {
   goFroggerScript();
@@ -152,6 +155,8 @@ function init() {
   }, 100);
 }
 
+
+
 //renders Lose or win
 function render() {
   if (alive === false) {
@@ -175,13 +180,15 @@ function render() {
   checkWin();
 }
 
+
+
 //Randomizes cars and Tree Positions before the game starts for 'unqiue' games
 function randomCarTree() {
   for (i = 0; i < 4; i++) {
     ranSpeed = Math.floor(Math.random() * 5 + 2 - winCounter);
     ranCarOne = Math.floor(Math.random() * 600);
     carString[i].style.left = ranCarOne + "px";
-    myMoveEnm(carString[i], carId[i], ranCarOne, ranSpeed);
+    moveCar(carString[i], carId[i], ranCarOne, ranSpeed);
   }
   for (i = 0; i < 2; i++) {
     ranSpeed = Math.floor(Math.random() * 5 + 8 - winCounter);
@@ -193,6 +200,8 @@ function randomCarTree() {
   //cannot do two logs yet the dectction only works for one row
   //myMoveBigTreeL(treeStringL[1], treeIdL[1], 300, 15, -300, 20);
 }
+
+
 
 //function that moves frog listen to the Keystoke of the keyboard then send the move direction to my movement function
 function moveFrg(e) {
@@ -231,8 +240,15 @@ function moveFrg(e) {
   }
 }
 
+
+
 //function that gives frog smooth hop
 function frgHop(directs, cangeVal) {
+  if(alive === false){
+    clearInterval(iD);
+    frogImg.src = "../images/death.png";
+    return;
+  }
   if (mov === 50) {
     console.log(frog.offsetTop);
     clearInterval(iD);
@@ -263,9 +279,11 @@ function frgHop(directs, cangeVal) {
   }
 }
 
+
+
 //need to add one for the cars to move the other way?
 //moves ennemy/car accross screen right to Left
-function myMoveEnm(enm, id, posistion, speed) {
+function moveCar(enm, id, posistion, speed) {
   let carLength = 49;
   let pos = posistion;
   clearInterval(id);
@@ -332,7 +350,7 @@ function detect(en) {
     return;
   }
   if (
-    frog.offsetTop >= en.offsetTop &&
+    frog.offsetTop >= parseInt(en.offsetTop) - 35 &&
     frog.offsetTop <= parseInt(en.offsetTop) + 49
   ) {
     console.log("here");
