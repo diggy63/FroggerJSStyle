@@ -7,6 +7,7 @@ const winSound = new Audio("audio/win sound 2-1.wav");
 const btnToStart = document.querySelector("#displayNone");
 const wrapper = document.querySelector("#wrapper");
 const startScreen = document.querySelector("#startScreen");
+const frogImg = document.querySelector("#frogImg");
 
 const testRoad = document.querySelector(".road")
 const frog = document.querySelector("#frog");
@@ -14,7 +15,6 @@ const midDisplay = document.querySelector("#midStats");
 const winCon = document.querySelector("#finArea");
 const roadOne = document.querySelector(".road");
 const gameAr = document.querySelector("#gameArea");
-const frogImg = document.querySelector("#frogImg").src;
 const carOne = document.querySelector("#car");
 const carTwo = document.querySelector("#car2");
 const carThree = document.querySelector("#car3");
@@ -208,25 +208,24 @@ function moveFrg(e) {
   //depending on which keystroke you hit its runs a setInterval thats "hops" to
   //its location
   if (e.key === "s") {
-    document.querySelector("#frogImg").src = frogTurn.down;
+    frogImg.src = frogTurn.down;
     iD = setInterval(frgHop, hopSpeed, "down", frog.style.top);
   } else if (e.key === "d") {
     if (frog.style.left != `500px`) {
-    document.querySelector("#frogImg").src = frogTurn.right;
+    frogImg.src = frogTurn.right;
     iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
     }else{
       createKeyboardListen();
     }
-    // frog.style.left = `${parseInt(frog.style.left) + mov}px`;
   } else if (e.key === "a") {
     if (frog.style.left != `0px`) {
-    document.querySelector("#frogImg").src = frogTurn.left;
+    frogImg.src = frogTurn.left;
     iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
     }else{
       createKeyboardListen();
     }
   } else if (e.key === "w") {
-    document.querySelector("#frogImg").src = frogTurn.up;
+    frogImg.src = frogTurn.up;
     if (frog.style.top != `0px`) {
       iD = setInterval(frgHop, hopSpeed, "up", frog.style.top);
     } else {
@@ -250,19 +249,19 @@ function frgHop(directs, cangeVal) {
   if (directs === "down") {
     frog.style.top = parseInt(cangeVal) + mov + `px`;
     mov++;
-    document.querySelector("#frogImg").src = frugHopDown[count];
+    frogImg.src = frugHopDown[count];
   } else if (directs === "right") {
     frog.style.left = parseInt(cangeVal) + mov + `px`;
     mov++;
-    document.querySelector("#frogImg").src = frugHopRight[count];
+    frogImg.src = frugHopRight[count];
   } else if (directs === "left") {
     frog.style.left = parseInt(cangeVal) - mov + `px`;
     mov++;
-    document.querySelector("#frogImg").src = frugHopLeft[count];
+    frogImg.src = frugHopLeft[count];
   } else if (directs === "up") {
     frog.style.top = parseInt(cangeVal) - mov + `px`;
     mov++;
-    document.querySelector("#frogImg").src = frugHopUp[count];
+    frogImg.src = frugHopUp[count];
   }
   if (mov % 10 === 0) {
     count++;
