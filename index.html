@@ -7,13 +7,14 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css" />
     <script defer src="js/app.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="startScreen"><button id="displayNone">Start</button></div>
+    <div id="startScreen"><p>Welcome to my rendition of Frogger using only html, css, and javascript. To control our little frog body we can use w to move up up, a to move left, s to move down, and d to move right. Try and reach the bottom grassy area without falling into the water or being run over. Enjoy.</p><button id="displayNone">Start</button></div>
     <div id="wrapper">
-      <div id="testArea"></div>
-      <div id="areaB"></div>
-      <div id="header">Daniel's Frogger Game</div>
+      <div id="header">DANIELS FROGGER GAME</div>
       <div id="gameBody">
         <div id="hidder"></div>
           <div id="gameArea">
@@ -96,8 +97,15 @@
         
         <div id="hidder"></div>
       </div>
-      <div id="testerButton">test</div>
+      <div id="gameButtonArea">
+      <div id="dPad">
+        <div class="dPadControls" id="upPad"></div>
+        <div class="dPadControls" id="leftPad"></div>
+        <div class="dPadControls" id="rightPad"></div>
+        <div class="dPadControls" id="downPad"></div>
+      </div>
       <div id="startButton">Start</div>
+      </div>
     </div>
   </body>
 </html>

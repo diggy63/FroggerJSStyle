@@ -10,24 +10,35 @@ body {
   /* background-color: rgb(196, 194, 194); */
   /* z-index: auto; */
 }
+p {
+  font-family: "Press Start 2P", cursive;
+  margin-top: 300px;
+  width: 500px;
+  font-size: 20px;
+}
 
-#startScreen{
-    height: 100vh;
-    width: 100vw;
-    background-color: bisque;
+#startScreen {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: bisque;
+  text-align: center;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 }
 #wrapper {
-    display: none;
-    background-color: rgb(97, 97, 97);
-    height: 100vh;
-    max-width: 900px;
-    border-radius: 100px;
-    border-style: solid;
-  }
+  display: none;
+  background-color: rgb(97, 97, 97);
+  height: 100vh;
+  max-width: 900px;
+  border-radius: 100px;
+  border-style: solid;
+}
 
-#gamePlayArea{
-display: flex;
-flex-direction: column;
+#gamePlayArea {
+  display: flex;
+  flex-direction: column;
 }
 
 #gameBody {
@@ -36,12 +47,14 @@ flex-direction: column;
   justify-content: center;
 }
 #header {
+  font-family: "Press Start 2P", cursive;
   border-radius: 15px;
   border-style: solid;
   margin: 30px auto;
-  font-size: 40px;
+  padding-top: 3px;
+  font-size: 30px;
   text-align: center;
-  width: 400px;
+  width: 700px;
 }
 #areaB {
   text-align: center;
@@ -61,6 +74,7 @@ flex-direction: column;
   width: auto;
 }
 #stats {
+  font-family: "Press Start 2P", cursive;
   display: flex;
   height: 100px;
   background-color: darkgray;
@@ -76,7 +90,10 @@ flex-direction: column;
   z-index: 100;
 }
 
-#car, #car2, #car3, #car4 {
+#car,
+#car2,
+#car3,
+#car4 {
   height: 50px;
   width: 50px;
   top: 0px;
@@ -87,8 +104,8 @@ flex-direction: column;
 }
 
 .road {
-    display: inline-block;
-    height: 50px;
+  display: inline-block;
+  height: 50px;
   /* border-style: dashed;
     border-left: 0px;
     border-right: 0px;
@@ -98,13 +115,16 @@ flex-direction: column;
   background-color: rgb(0, 0, 0);
 }
 
-#startArea, #safeArea {
+#startArea,
+#safeArea {
   background-image: url("../images/grass.png");
   height: 50px;
   background-color: rgb(134, 255, 0);
 }
 
-#river1, #river2, #river3 {
+#river1,
+#river2,
+#river3 {
   display: flex;
   height: 50px;
   background-image: url("../images/water.png");
@@ -161,7 +181,7 @@ img {
     height: 100px;
 } */
 #hidder {
-    background-color: rgb(97, 97, 97);
+  background-color: rgb(97, 97, 97);
   height: 650px;
   width: 250px;
   /* background-color: black; */
@@ -169,7 +189,8 @@ img {
   writing-mode: vertical-rl;
   text-orientation: upright;
 }
-#startButton, #testerButton {
+#startButton,
+#testerButton {
   margin: 20px auto;
   border-radius: 5px;
   border-style: solid;
@@ -177,19 +198,22 @@ img {
   height: 20px;
 }
 #midStats {
-    color: rgb(55, 55, 55);
-  font-size: 30px;
+  color: rgb(55, 55, 55);
+  font-size: 24px;
   width: 70%;
   border-color: black;
   border-style: solid;
   padding-top: 20px;
 }
 
-#winCount, #loseCount {
-    font-size: 36px;
-    color: rgb(55, 55, 55);
+#winCount,
+#loseCount {
+  font-size: 30px;
+  color: rgb(55, 55, 55);
 }
-#rightStats, #leftStats {
+#rightStats,
+#leftStats {
+  padding-top: 10px;
   width: 15%;
   border-style: solid;
 }
@@ -199,9 +223,9 @@ img {
   color: rgb(55, 55, 55);
 }
 
-.carClass{
-    display: inline;
-    height: 50px;
+.carClass {
+  display: inline;
+  height: 50px;
   width: 50px;
   top: 0px;
   left: 500px;
@@ -212,17 +236,17 @@ img {
   z-index: 999999;
 }
 
-.displayFlex{
-    display: block;
+.displayFlex {
+  display: block;
 }
-#spawn{
-    height: 50px;
-    width: 50px;
-    background-color: aliceblue;
+#spawn {
+  height: 50px;
+  width: 50px;
+  background-color: aliceblue;
 }
 
 /* 768px is a common "breakpoint" width for tablets */
-/* @media only screen and (max-height: 800px) {
+@media only screen and (max-height: 800px) {
   #header {
     display: none;
   }
@@ -234,14 +258,34 @@ img {
   #gameBody {
     margin-top: 40px;
   }
-} */
+}
 
 @media only screen and (max-width: 412px) {
-  /* #gameBody{
-        height: 300px;
-    
-    } */
-  #road,
+  body {
+    font-size: 12px;
+  }
+  #header {
+    display: none;
+  }
+  #gameArea {
+    width: 340px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #gameBody {
+    width: 100vw;
+    height: 396px;
+  }
+  #wrapper {
+    height: 100vh;
+    border-radius: 0px;
+  }
+  #stats {
+    width: 340px;
+  }
+  .road,
   #startArea,
   #river1,
   #river2,
@@ -249,6 +293,7 @@ img {
   #finArea,
   #safeArea {
     height: 30px;
+    width: 340px;
   }
   img {
     height: 30px;
@@ -256,4 +301,69 @@ img {
   #stats {
     height: 60px;
   }
-}
+  #hidder {
+    width: 40px;
+    height: 400px;
+  }
+  #winCount,
+  #loseCount,
+  #winCount,
+  #loseCount,
+  #winLoseTally,
+  #midStats {
+    font-size: 12px;
+  }
+  #frog > img {
+    height: 30px;
+  }
+
+  #log,
+  #log2,
+  #log3,
+  #log4 {
+      height: 30px;
+      width: 90px;
+  }
+  #gameButtonArea{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+  }
+
+  #upPad {
+    grid-column: 1 / span 2;
+    justify-self: center;
+  }
+  #leftPad {
+      align-self: center;
+  }
+  #rightPad {
+      justify-self: end;
+      align-self: center;
+  }
+  #downPad {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    align-self: end;
+  }
+  
+  #dPad{
+      display: grid;
+      margin-top: 50px;
+      margin-left: 30px;
+      height: 175px;
+      width: 175px;
+      border-style: solid;
+      border-radius: 60px;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+
+  }
+
+  }
+  .dPadControls{
+      height: 50px;
+      width: 50px;
+      background-color:rgb(0, 0, 0);
+  }
+  
+

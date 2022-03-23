@@ -1,5 +1,6 @@
 
 //=============> Audio Constants <==========================================
+const winSound = new Audio("audio/win sound 2-1.wav")
 const hopSound = new Audio("audio/SFX_Jump_07.wav");
 const spalshSound = new Audio("audio/sound-frogger-plunk.wav");
 spalshSound.volume = .3;
@@ -8,7 +9,10 @@ plunckedSound.volume = .3;
 const theme = new Audio('audio/froggerTheme.mp3');
 theme.loop = true;
 theme.volume = 0.04;
+
+
 //=============> grabing everything we need from the Page <==================
+const contorller = document.querySelector("#dPad")
 const btnToStart = document.querySelector("#displayNone");
 const wrapper = document.querySelector("#wrapper");
 const startScreen = document.querySelector("#startScreen");
@@ -114,6 +118,9 @@ const splashAni = [
   "../images/BLANK_ICON.png",
 ];
 
+
+contorller.addEventListener("click", moveFrg);
+
 startBtn.addEventListener("click", init);
 btnToStart.addEventListener("click", changeDisplay);
 // testBtn.addEventListener("click", createNewCar);
@@ -134,10 +141,13 @@ function init() {
   //I need to use this because I am using relative display for my game area
   if (roadOne.clientHeight === 30) {
     phoneConstant = 3 / 5;
+    phoneCDetect = 1/4;
     //console.log(phoneConstant);
+  }else{
+    phoneConstant = 1;
   }
   reset = true;
-  document.querySelector("#frogImg").src = frogTurn.down;
+  frogImg.src = frogTurn.down;
   //This setTimeout lets the reset = true be read by all the setInterval loops
   //and gives them time to get to there clear postition before assigning
   //new random values. So they wont glitch out
@@ -145,7 +155,7 @@ function init() {
     count = 0;
     drowned = false;
     frog.style.top = `0px`;
-    frog.style.left = `250px`;
+    frog.style.left = (250 * phoneConstant) + `px`;
     document.querySelector("#frogImg").src = frogTurn.down;
     alive = true;
     win = false;
@@ -185,9 +195,9 @@ function render() {
 //Randomizes cars and Tree Positions before the game starts for 'unqiue' games
 function randomCarTree() {
   for (i = 0; i < 4; i++) {
-    ranSpeed = Math.floor(Math.random() * 5 + 2 - winCounter);
+    ranSpeed = ((Math.floor((Math.random() * 5) + 2 - winCounter))/ phoneConstant);
     ranCarOne = Math.floor(Math.random() * 600);
-    carString[i].style.left = ranCarOne + "px";
+    carString[i].style.left = (ranCarOne * phoneConstant) + "px";
     moveCar(carString[i], carId[i], ranCarOne, ranSpeed);
   }
   for (i = 0; i < 2; i++) {
@@ -207,28 +217,29 @@ function randomCarTree() {
 function moveFrg(e) {
   //this remove keystokes being read so that you dont gain ultimate speed
   document.removeEventListener("keydown", moveFrg, false);
+  console.log(e.target.id);
   mov = 1;
 
   //depending on which keystroke you hit its runs a setInterval thats "hops" to
   //its location
-  if (e.key === "s") {
+  if (e.key === "s" || e.target.id === "downPad") {
     frogImg.src = frogTurn.down;
     iD = setInterval(frgHop, hopSpeed, "down", frog.style.top);
-  } else if (e.key === "d") {
-    if (frog.style.left != `500px`) {
+  } else if (e.key === "d" || e.target.id === "rightPad") {
+    if (frog.style.left != (500 * phoneConstant) + `px`) {
       frogImg.src = frogTurn.right;
       iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
     } else {
       createKeyboardListen();
     }
-  } else if (e.key === "a") {
+  } else if (e.key === "a" || e.target.id === "leftPad") {
     if (frog.style.left != `0px`) {
       frogImg.src = frogTurn.left;
       iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
     } else {
       createKeyboardListen();
     }
-  } else if (e.key === "w") {
+  } else if (e.key === "w" || e.target.id === "upPad") {
     frogImg.src = frogTurn.up;
     if (frog.style.top != `0px`) {
       iD = setInterval(frgHop, hopSpeed, "up", frog.style.top);
@@ -249,7 +260,7 @@ function frgHop(directs, cangeVal) {
     frogImg.src = "../images/death.png";
     return;
   }
-  if (mov === 50) {
+  if (mov === (50 * phoneConstant)) {
     console.log(frog.offsetTop);
     clearInterval(iD);
     render();
@@ -284,16 +295,12 @@ function frgHop(directs, cangeVal) {
 //need to add one for the cars to move the other way?
 //moves ennemy/car accross screen right to Left
 function moveCar(enm, id, posistion, speed) {
-  let carLength = 49;
   let pos = posistion;
   clearInterval(id);
   id = setInterval(Drive, speed);
   function Drive() {
-    //console.log(roadOne)
-    if (pos == -100) {
-      pos = 550;
-      carLength = 50;
-      enm.style.width = 50 + "px";
+    if (pos == (-100 * phoneConstant)) {
+      pos = (550 * phoneConstant);
     } else if (reset === true) {
       clearInterval(id);
     } else {
@@ -306,16 +313,12 @@ function moveCar(enm, id, posistion, speed) {
 
 //moves tree accross screen right to left
 function moveTreeRL(enm, id, posistion, speed) {
-  let logLength = 150;
-
   let pos = posistion;
   clearInterval(id);
   id = setInterval(Drive, speed);
   function Drive() {
-    if (pos == -165) {
-      pos = 550;
-      enm.style.width = 150 + "px";
-      logLength = 150;
+    if (pos == (-165 * (phoneConstant))) {
+      pos =(550 * phoneConstant);
     } else if (reset === true) {
       clearInterval(id);
     } else {
@@ -332,10 +335,10 @@ function moveTreeLR(enm, id, posistion, speed, startId, offesetL) {
   clearInterval(id);
   id = setInterval(Drive, speed);
   function Drive() {
-    if (pos == 708 + startId) {
-      pos = startId - 25;
+    if (pos == (550 * phoneConstant)) {
+      pos = -160;
     } else if (reset === true) {
-      clearInterval(id);
+      clearInterval(id);s
     } else {
       pos++;
       enm.style.left = pos + "px";
@@ -350,12 +353,12 @@ function detect(en) {
     return;
   }
   if (
-    frog.offsetTop >= parseInt(en.offsetTop) - 35 &&
-    frog.offsetTop <= parseInt(en.offsetTop) + 49
+    frog.offsetTop >= parseInt(en.offsetTop) - (15 * phoneCDetect) &&
+    frog.offsetTop <= parseInt(en.offsetTop) + (49 * phoneConstant)
   ) {
     console.log("here");
     if (
-      parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 110) &&
+      parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 80) &&
       parseInt(frog.offsetLeft) >= en.offsetLeft
     ) {
       alive = false;
@@ -374,11 +377,11 @@ function detectOnTreeL(en, offSet, id) {
   }
   if (
     frog.offsetTop >= en.offsetTop &&
-    frog.offsetTop <= parseInt(en.offsetTop) + 49
+    frog.offsetTop <= parseInt(en.offsetTop) + (49 * phoneConstant)
   ) {
     if (
       parseInt(frog.offsetLeft + offSet) >= en.offsetLeft &&
-      parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + 150)
+      parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + (150 * phoneConstant))
     ) {
       onTree = true;
       frog.style.left = parseInt(frog.style.left) + 1 + `px`;
@@ -400,11 +403,11 @@ function detectOnTree(en, id) {
   }
   if (
     frog.offsetTop >= en.offsetTop &&
-    frog.offsetTop <= parseInt(en.offsetTop) + 48
+    frog.offsetTop <= parseInt(en.offsetTop) + (48 * phoneConstant)
   ) {
     if (
       parseInt(frog.offsetLeft) > en.offsetLeft &&
-      parseInt(frog.offsetLeft) < parseInt(en.offsetLeft + 150)
+      parseInt(frog.offsetLeft) < parseInt(en.offsetLeft + (150 * phoneConstant))
     ) {
       onTree = true;
       frog.style.left = parseInt(frog.style.left) - 1 + `px`;
@@ -518,4 +521,16 @@ function createKeyboardListen() {
 //   testRoad.append(newDiv);
 //   myMoveEnm(newDiv, testId, 0, ranSpeed);
 
+// }
+
+
+// let indexTxt = 0;
+// const introTxt = "Welcome to my rendition of Frogger using only html, css, and javascript. To control our little frog body we can use w to move up up, a to move left, s to move down, and d to move right. Try and reach the bottom grassy area without falling into the water or being run over. Enjoy.";
+// const speed = 40;
+// function () {
+//   if (i < txt.length) {
+//     document.getElementById("instruct").innerHTML += txt.charAt(i);
+//     i++;
+//     setTimeout(typeWriter, speed);
+//   }
 // }
