@@ -76,7 +76,7 @@ flex-direction: column;
   z-index: 100;
 }
 
-#enemy, #enemy2, #enemy3, #enemy4 {
+#car, #car2, #car3, #car4 {
   height: 50px;
   width: 50px;
   top: 0px;
@@ -222,7 +222,7 @@ img {
 }
 
 /* 768px is a common "breakpoint" width for tablets */
-@media only screen and (max-height: 800px) {
+/* @media only screen and (max-height: 800px) {
   #header {
     display: none;
   }
@@ -234,7 +234,7 @@ img {
   #gameBody {
     margin-top: 40px;
   }
-}
+} */
 
 @media only screen and (max-width: 412px) {
   /* #gameBody{

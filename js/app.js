@@ -15,10 +15,10 @@ const winCon = document.querySelector("#finArea");
 const roadOne = document.querySelector(".road");
 const gameAr = document.querySelector("#gameArea");
 const frogImg = document.querySelector("#frogImg").src;
-const enmElOne = document.querySelector("#enemy");
-const enmElTwo = document.querySelector("#enemy2");
-const enmElThree = document.querySelector("#enemy3");
-const enmElFour = document.querySelector("#enemy4");
+const carOne = document.querySelector("#car");
+const carTwo = document.querySelector("#car2");
+const carThree = document.querySelector("#car3");
+const carFour = document.querySelector("#car4");
 const stats = document.querySelector("#stats");
 const log1 = document.querySelector("#log");
 const log2 = document.querySelector("#log2");
@@ -52,7 +52,7 @@ let idLog2 = null;
 let idLog3 = null;
 let idLog4 = null;
 let testId = null;
-let carString = [enmElOne, enmElTwo, enmElThree, enmElFour];
+let carString = [carOne, carTwo, carThree, carFour];
 let carId = [idEnm, idEnm1, idEnm2, idEnm3];
 let treeStringR = [log1, log3];
 let treeIdR = [idLog, idLog3];
@@ -232,6 +232,8 @@ function moveFrg(e) {
     } else {
       createKeyboardListen();
     }
+  }else {
+    createKeyboardListen(); 
   }
 }
 
