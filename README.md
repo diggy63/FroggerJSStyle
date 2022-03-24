@@ -31,4 +31,8 @@ and wins if he makes it to the bottom
 
 <img src="images/introScreen.png" width="300">
 
+click below to play
 https://diggy63.github.io/FroggerJSStyle/
+
+<h2>Getting Started</h2>
+The ultimate goal is for the map to randomize every level or start of the game making the levels harder as you beat them. So first level 2 roads, 2 cars, and 1 river. Then maybe after you win 4 times you get 3 roads, 4 cars, 2 river and so on.
