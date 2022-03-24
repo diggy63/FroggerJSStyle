@@ -312,7 +312,7 @@ img {
 
 
 /* 768px is a common "breakpoint" width for tablets */
-@media only screen and (max-height: 800px) {
+@media only screen and (max-height: 1000px) {
      #header {
           display: none;
      }
