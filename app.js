@@ -157,7 +157,7 @@ function init() {
           alive = true;
           win = false;
           reset = false;
-          frogImg.src = frogTurn.down;
+          frogImg.src = "https://i.imgur.com/9PX84sh.png";
           randomCarTree();
           createListen();
      }, 100);
@@ -351,7 +351,7 @@ function detect(en) {
           ) {
                alive = false;
                frogImg.src = "../images/death.png";
-               document.removeEventListener("keydown", moveFrg, false);
+               removeListen();
                plunckedSound.play();
                render();
           }
@@ -378,7 +378,7 @@ function detectOnTreeL(en, offSet, id) {
                clearInterval(id);
                drowned === true;
                splashAnimation();
-               document.removeEventListener("keydown", moveFrg, false);
+               removeListen();
                alive = false;
                render();
           }
@@ -405,7 +405,7 @@ function detectOnTree(en, id) {
                clearInterval(id);
                drowned === true;
                splashAnimation();
-               document.removeEventListener("keydown", moveFrg, false);
+               removeListen();
                alive = false;
                render();
           }
