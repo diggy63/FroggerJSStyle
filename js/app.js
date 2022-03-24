@@ -249,7 +249,6 @@ function detectInputs(e) {
 function frgHop(directs, cangeVal) {
      if (alive === false) {
           clearInterval(iD);
-          //frogImg.src = "../images/death.png";
           return;
      }
      if (mov === 50 * phoneConstant) {
@@ -282,7 +281,6 @@ function frgHop(directs, cangeVal) {
      }
 }
 
-//need to add one for the cars to move the other way?
 //moves ennemy/car accross screen right to Left
 function moveCar(enm, id, posistion, speed) {
      let pos = posistion;
@@ -360,7 +358,7 @@ function detect(en) {
      }
 }
 
-//detection function for tress moving from left to right
+//frog detection function for tress moving from left to right
 function detectOnTreeL(en, offSet, id) {
      if (alive === false) {
           return;
@@ -387,7 +385,7 @@ function detectOnTreeL(en, offSet, id) {
      }
 }
 
-//detection function for trees moving from rigt to left so frogger can live
+//frog detection function for trees moving from rigt to left so frogger can live
 function detectOnTree(en, id) {
      if (alive === false) {
           return;
@@ -494,6 +492,7 @@ function createListen() {
      contorller.addEventListener("click", detectInputs);
 }
 
+//removes listener for keyboard and dPad inputs
 function removeListen(){
      document.removeEventListener("keydown", detectInputs, false);
      contorller.removeEventListener("click", detectInputs, false);
