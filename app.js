@@ -128,7 +128,7 @@ function changeDisplay() {
      startScreen.style.display = "none";
      wrapper.style.display = "block";
      init();
-     //theme.play();
+     theme.play();
 }
 
 //Inits/restarts Game and reset all varibles to intial state
