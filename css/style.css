@@ -14,10 +14,27 @@ body {
 }
 p {
      font-family: "Bungee", cursive;
-     margin-top: 300px;
+     margin-top: 150px;
      width: 1000px;
      font-size: 36px;
 }
+
+#displayNone{
+     background-color: rgb(211, 206, 206);
+     font-family: "Bungee", cursive;
+     font-size: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: center; 
+     border-radius: 5px;
+     border-style: solid;
+     width: 90px;
+     height: 60px;
+}
+#displayNone:hover{ 
+     background-color: rgb(111, 111, 111);
+     border-color: rgb(211, 206, 206);
+ }
 
 #dPad {
      display: none;
@@ -451,4 +468,9 @@ img {
      height: 50px;
      width: 50px;
      background-color: rgb(177, 177, 177);
+}
+p {
+     margin-top: 200px;
+     width: 350px;
+     font-size: 18px;
 }
