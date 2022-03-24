@@ -1,517 +1,467 @@
 body {
-     background-image: url("../images/DeskBackG.jpg");
-     background-size: cover;
-     display: flex;
-     height: 100vh;
-     box-sizing: border-box;
-     flex-direction: column;
-     max-width: 900px;
-     text-align: center;
-     margin: auto;
-     align-items: center;
-     /* background-color: rgb(196, 194, 194); */
-     /* z-index: auto; */
+    background-image: url("../images/DeskBackG.jpg");
+    background-size: cover;
+    display: flex;
+    height: 100vh;
+    box-sizing: border-box;
+    flex-direction: column;
+    max-width: 900px;
+    text-align: center;
+    margin: auto;
+    align-items: center;
+    /* background-color: rgb(196, 194, 194); */
+    /* z-index: auto; */
 }
 p {
-     font-family: "Bungee", cursive;
-     margin-top: 150px;
-     width: 1000px;
-     font-size: 36px;
+    font-family: "Bungee", cursive;
+    margin-top: 150px;
+    width: 1000px;
+    font-size: 36px;
 }
 
 #displayNone {
-     background-color: rgb(211, 206, 206);
-     font-family: "Bungee", cursive;
-     font-size: 20px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     border-radius: 5px;
-     border-style: solid;
-     width: 90px;
-     height: 60px;
+    background-color: rgb(211, 206, 206);
+    font-family: "Bungee", cursive;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border-style: solid;
+    width: 90px;
+    height: 60px;
 }
 #displayNone:hover {
-     background-color: rgb(111, 111, 111);
-     border-color: rgb(211, 206, 206);
+    background-color: rgb(111, 111, 111);
+    border-color: rgb(211, 206, 206);
 }
 
 #dPad {
-     display: none;
+    display: none;
 }
 
 #startScreen {
-     display: flex;
-     height: 100vh;
-     width: 100vw;
-     background-color: bisque;
-     text-align: center;
-     flex-direction: column;
-     align-content: center;
-     align-items: center;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: bisque;
+    text-align: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
 }
 #wrapper {
-     display: none;
-     background-color: rgb(97, 97, 97);
-     height: 100vh;
-     max-width: 900px;
-     border-radius: 100px;
-     border-style: solid;
+    display: none;
+    background-color: rgb(97, 97, 97);
+    height: 100vh;
+    max-width: 900px;
+    border-radius: 100px;
+    border-style: solid;
 }
 
 #gamePlayArea {
-     display: flex;
-     flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 #gameBody {
-     max-width: 1000px;
-     display: flex;
-     justify-content: center;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
 }
 #header {
-     font-family: "Bungee", cursive;
-     border-radius: 15px;
-     border-style: solid;
-     margin: 30px auto;
-     padding-top: 3px;
-     font-size: 50px;
-     text-align: center;
-     width: 700px;
+    font-family: "Bungee", cursive;
+    border-radius: 15px;
+    border-style: solid;
+    margin: 30px auto;
+    padding-top: 3px;
+    font-size: 50px;
+    text-align: center;
+    width: 700px;
 }
 #areaB {
-     text-align: center;
+    text-align: center;
 }
 #frog {
-     height: 50px;
-     width: 50px;
-     top: 0px;
-     left: 300px;
-     color: aliceblue;
-     position: relative;
-     z-index: 90;
+    height: 50px;
+    width: 50px;
+    top: 0px;
+    left: 300px;
+    color: aliceblue;
+    position: relative;
+    z-index: 90;
 }
 
 #frog > img {
-     height: auto;
-     width: auto;
+    height: auto;
+    width: auto;
 }
 #stats {
-     font-family: "Press Start 2P", cursive;
-     display: flex;
-     height: 100px;
-     background-color: darkgray;
-     justify-content: space-evenly;
+    font-family: "Press Start 2P", cursive;
+    display: flex;
+    height: 100px;
+    background-color: darkgray;
+    justify-content: space-evenly;
 }
 #gameArea {
-     margin-top: 30px;
-     margin-left: 0px;
-     height: 600px;
-     width: 800px;
-     border-style: solid;
-     border-radius: 10px;
-     z-index: 100;
+    margin-top: 30px;
+    margin-left: 0px;
+    height: 600px;
+    width: 800px;
+    border-style: solid;
+    border-radius: 10px;
+    z-index: 100;
 }
 
 #car,
 #car2,
 #car3,
 #car4 {
-     height: 50px;
-     width: 50px;
-     top: 0px;
-     left: 500px;
-     color: aliceblue;
-     position: relative;
-     z-index: 91;
+    height: 50px;
+    width: 50px;
+    top: 0px;
+    left: 500px;
+    color: aliceblue;
+    position: relative;
+    z-index: 91;
 }
 
 .road {
-     display: inline-block;
-     height: 50px;
-     /* border-style: dashed;
-     border-left: 0px;
-     border-right: 0px;
-     border-width: 1px;
-     border-color: aliceblue; */
-     background-image: url("../images/road.png");
-     background-color: rgb(0, 0, 0);
+    display: inline-block;
+    height: 50px;
+    /* border-style: dashed;
+    border-left: 0px;
+    border-right: 0px;
+    border-width: 1px;
+    border-color: aliceblue; */
+    background-image: url("../images/road.png");
+    background-color: rgb(0, 0, 0);
 }
 
 #startArea,
 #safeArea {
-     background-image: url("../images/grass.png");
-     height: 50px;
-     background-color: rgb(134, 255, 0);
+    background-image: url("../images/grass.png");
+    height: 50px;
+    background-color: rgb(134, 255, 0);
 }
 
 #river1,
 #river2,
 #river3 {
-     display: flex;
-     height: 50px;
-     background-image: url("../images/water.png");
-     background-color: rgb(51, 255, 204);
+    display: flex;
+    height: 50px;
+    background-image: url("../images/water.png");
+    background-color: rgb(51, 255, 204);
 }
 
 #finArea {
-     background-image: url("../images/grass.png");
-     height: 50px;
-     z-index: 0;
-     background-color: rgb(134, 255, 0);
+    background-image: url("../images/grass.png");
+    height: 50px;
+    z-index: 0;
+    background-color: rgb(134, 255, 0);
 }
 
 #log {
-     height: 50px;
-     width: 150px;
-     top: 0px;
-     left: 500px;
-     color: aliceblue;
-     position: relative;
-     z-index: 80;
+    height: 50px;
+    width: 150px;
+    top: 0px;
+    left: 500px;
+    color: aliceblue;
+    position: relative;
+    z-index: 80;
 }
 #log2 {
-     height: 50px;
-     width: 150px;
-     top: 0px;
-     left: -165px;
-     color: aliceblue;
-     position: relative;
+    height: 50px;
+    width: 150px;
+    top: 0px;
+    left: -165px;
+    color: aliceblue;
+    position: relative;
 }
 #log3 {
-     height: 50px;
-     width: 150px;
-     top: 0px;
-     left: 500px;
-     color: aliceblue;
-     position: relative;
+    height: 50px;
+    width: 150px;
+    top: 0px;
+    left: 500px;
+    color: aliceblue;
+    position: relative;
 }
 
 img {
-     height: 50px;
+    height: 50px;
 }
 
 #hidder {
-     background-color: rgb(97, 97, 97);
-     height: 650px;
-     width: 250px;
-     /* background-color: black; */
-     z-index: 980;
-     writing-mode: vertical-rl;
-     text-orientation: upright;
+    background-color: rgb(97, 97, 97);
+    height: 650px;
+    width: 250px;
+    /* background-color: black; */
+    z-index: 980;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
 }
 #startButton {
-     background-color: rgb(211, 206, 206);
-     font-family: "Bungee", cursive;
-     font-size: 20px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     margin: 100px auto;
-     border-radius: 5px;
-     border-style: solid;
-     width: 90px;
-     height: 60px;
+    background-color: rgb(211, 206, 206);
+    font-family: "Bungee", cursive;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 100px auto;
+    border-radius: 5px;
+    border-style: solid;
+    width: 90px;
+    height: 60px;
 }
 #startButton:active {
-     background-color: rgb(111, 111, 111);
+    background-color: rgb(111, 111, 111);
 }
 #midStats {
-     color: rgb(55, 55, 55);
-     font-size: 24px;
-     width: 70%;
-     border-color: black;
-     border-style: solid;
-     padding-top: 20px;
+    color: rgb(55, 55, 55);
+    font-size: 24px;
+    width: 70%;
+    border-color: black;
+    border-style: solid;
+    padding-top: 20px;
 }
 
 #winCount,
 #loseCount {
-     font-size: 30px;
-     color: rgb(55, 55, 55);
+    font-size: 30px;
+    color: rgb(55, 55, 55);
 }
 #rightStats,
 #leftStats {
-     padding-top: 10px;
-     width: 15%;
-     border-style: solid;
+    padding-top: 10px;
+    width: 15%;
+    border-style: solid;
 }
 
 #winLoseTally {
-     font-size: 36px;
-     color: rgb(55, 55, 55);
+    font-size: 36px;
+    color: rgb(55, 55, 55);
 }
 
 .carClass {
-     display: inline;
-     height: 50px;
-     width: 50px;
-     top: 0px;
-     left: 500px;
-     color: aliceblue;
-     position: relative;
-     z-index: 91;
-     /* background-image: url("..images/yellow car.png"); */
-     z-index: 999999;
+    display: inline;
+    height: 50px;
+    width: 50px;
+    top: 0px;
+    left: 500px;
+    color: aliceblue;
+    position: relative;
+    z-index: 91;
+    /* background-image: url("..images/yellow car.png"); */
+    z-index: 999999;
 }
 
 .displayFlex {
-     display: block;
+    display: block;
 }
 #spawn {
-     height: 50px;
-     width: 50px;
-     background-color: aliceblue;
+    height: 50px;
+    width: 50px;
+    background-color: aliceblue;
 }
 
 #gameButtonArea {
-     display: grid;
-     grid-template-columns: 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .dPadControls {
-     height: 50px;
-     width: 50px;
-     top: 0px;
-     left: 300px;
-     color: aliceblue;
-     position: relative;
-     z-index: 90;
-}
-
-#frog > img {
-     height: auto;
-     width: auto;
-}
-#stats {
-     font-family: "Press Start 2P", cursive;
-     display: flex;
-     height: 100px;
-     background-color: darkgray;
-     justify-content: space-evenly;
-}
-#gameArea {
-     margin-top: 30px;
-     margin-left: 0px;
-     height: 600px;
-     width: 800px;
-     border-style: solid;
-     border-radius: 10px;
-     z-index: 100;
-}
-
-#car,
-#car2,
-#car3,
-#car4 {
-     height: 50px;
-     width: 50px;
-     top: 0px;
-     left: 500px;
-     color: aliceblue;
-     position: relative;
-     z-index: 91;
-}
-
-.road {
-     display: inline-block;
-     height: 50px;
-     /* border-style: dashed;
-    border-left: 0px;
-    border-right: 0px;
-    border-width: 1px;
-    border-color: aliceblue; */
-     background-image: url("../images/road.png");
-     background-color: rgb(0, 0, 0);
+    height: 50px;
+    width: 50px;
+    background-color: rgb(0, 0, 0);
 }
 
 #upPad {
-     grid-column: 1 / span 2;
-     justify-self: center;
-     height: 60px;
-     border-bottom-left-radius: 40px;
-     border-bottom-right-radius: 40px;
+    grid-column: 1 / span 2;
+    justify-self: center;
+    height: 60px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
 }
 #leftPad {
-     align-self: center;
-     width: 60px;
-     border-bottom-right-radius: 40px;
-     border-top-right-radius: 40px;
+    align-self: center;
+    width: 60px;
+    border-bottom-right-radius: 40px;
+    border-top-right-radius: 40px;
 }
 #rightPad {
-     justify-self: end;
-     align-self: center;
-     width: 60px;
-     border-bottom-left-radius: 40px;
-     border-top-left-radius: 40px;
+    justify-self: end;
+    align-self: center;
+    width: 60px;
+    border-bottom-left-radius: 40px;
+    border-top-left-radius: 40px;
 }
 #downPad {
-     grid-column: 1 / span 2;
-     justify-self: center;
-     align-self: end;
-     height: 60px;
-     border-top-left-radius: 40px;
-     border-top-right-radius: 40px;
+    grid-column: 1 / span 2;
+    justify-self: center;
+    align-self: end;
+    height: 60px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
 }
 
 #dPad {
-     display: grid;
-     margin-top: 50px;
-     margin-left: 150px;
-     height: 175px;
-     width: 175px;
-     border-style: solid;
-     border-radius: 60px;
-     grid-template-columns: 1fr 1fr;
-     grid-template-rows: 1fr 1fr 1fr;
+    display: grid;
+    margin-top: 50px;
+    margin-left: 150px;
+    height: 175px;
+    width: 175px;
+    border-style: solid;
+    border-radius: 60px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 /* 768px is a common "breakpoint" width for tablets */
 @media only screen and (max-height: 1000px) {
-     #header {
-          display: none;
-     }
-     #hidder {
-          margin-top: 80px;
-          height: 550px;
-          width: 250px;
-     }
-     #gameBody {
-          margin-top: 40px;
-     }
-     #dPad {
-          display: none;
-     }
-     #startButton {
-          grid-column: 1 / span 2;
-          justify-self: center;
-          margin-top: 5px;
-     }
+    #header {
+         display: none;
+    }
+    #hidder {
+         margin-top: 80px;
+         height: 550px;
+         width: 250px;
+    }
+    #gameBody {
+         margin-top: 40px;
+    }
+    #dPad {
+         display: none;
+    }
+    #startButton {
+         grid-column: 1 / span 2;
+         justify-self: center;
+         margin-top: 5px;
+    }
 }
 
 @media only screen and (max-width: 450px) {
-     body {
-          font-size: 12px;
-     }
-     #header {
-          display: none;
-     }
-     #gameArea {
-          width: 340px;
-          height: 360px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-     }
-     #gameBody {
-          width: 100vw;
-          height: 396px;
-     }
-     #wrapper {
-          height: 100vh;
-          border-radius: 0px;
-     }
-     #stats {
-          width: 340px;
-     }
-     .road,
-     #startArea,
-     #river1,
-     #river2,
-     #river3,
-     #finArea,
-     #safeArea {
-          height: 30px;
-          width: 340px;
-     }
-     img {
-          height: 30px;
-     }
-     #stats {
-          height: 60px;
-     }
-     #hidder {
-          width: 40px;
-          height: 400px;
-     }
-     #winCount,
-     #loseCount,
-     #winCount,
-     #loseCount,
-     #winLoseTally,
-     #midStats {
-          font-size: 12px;
-     }
-     #frog > img {
-          height: 30px;
-     }
+    body {
+         font-size: 12px;
+    }
+    #header {
+         display: none;
+    }
+    #gameArea {
+         width: 340px;
+         height: 360px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+    }
+    #gameBody {
+         width: 100vw;
+         height: 396px;
+    }
+    #wrapper {
+         height: 100vh;
+         border-radius: 0px;
+    }
+    #stats {
+         width: 340px;
+    }
+    .road,
+    #startArea,
+    #river1,
+    #river2,
+    #river3,
+    #finArea,
+    #safeArea {
+         height: 30px;
+         width: 340px;
+    }
+    img {
+         height: 30px;
+    }
+    #stats {
+         height: 60px;
+    }
+    #hidder {
+         width: 40px;
+         height: 400px;
+    }
+    #winCount,
+    #loseCount,
+    #winCount,
+    #loseCount,
+    #winLoseTally,
+    #midStats {
+         font-size: 12px;
+    }
+    #frog > img {
+         height: 30px;
+    }
 
-     #log,
-     #log2,
-     #log3,
-     #log4 {
-          height: 30px;
-          width: 90px;
-     }
-     .dPadControls {
-          height: 50px;
-          width: 50px;
-          background-color: rgb(177, 177, 177);
-     }
+    #log,
+    #log2,
+    #log3,
+    #log4 {
+         height: 30px;
+         width: 90px;
+    }
+    .dPadControls {
+         height: 50px;
+         width: 50px;
+         background-color: rgb(177, 177, 177);
+    }
 
-     #gameButtonArea {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-     }
+    #gameButtonArea {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+    }
 
-     #upPad {
-          grid-column: 1 / span 2;
-          justify-self: center;
-          /* border-bottom-left-radius: 0px;
-         border-bottom-right-radius: 0px; */
-     }
-     #leftPad {
-          align-self: center;
-          /* border-top-right-radius: 0px;
-         border-bottom-right-radius: 0px; */
-     }
-     #rightPad {
-          justify-self: end;
-          align-self: center;
-          /* border-top-left-radius: 0px;
-         border-bottom-left-radius: 0px; */
-     }
-     #downPad {
-          grid-column: 1 / span 2;
-          justify-self: center;
-          align-self: end;
-          /* border-top-left-radius: 0px;
-         border-top-right-radius: 0px; */
-     }
+    #upPad {
+         grid-column: 1 / span 2;
+         justify-self: center;
+         /* border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px; */
+    }
+    #leftPad {
+         align-self: center;
+         /* border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px; */
+    }
+    #rightPad {
+         justify-self: end;
+         align-self: center;
+         /* border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px; */
+    }
+    #downPad {
+         grid-column: 1 / span 2;
+         justify-self: center;
+         align-self: end;
+         /* border-top-left-radius: 0px;
+        border-top-right-radius: 0px; */
+    }
 
-     #dPad {
-          display: grid;
-          margin-top: 50px;
-          margin-left: 30px;
-          height: 175px;
-          width: 175px;
-          border-style: solid;
-          border-radius: 60px;
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: 1fr 1fr 1fr;
-     }
-     .dPadControls {
-          height: 50px;
-          width: 50px;
-          background-color: rgb(177, 177, 177);
-     }
-     p {
-          margin-top: 200px;
-          width: 350px;
-          font-size: 18px;
-     }#startButton {
-        grid-column: 2 / span 1;
-        justify-self: center;
-        margin-top: 5px;
-   }
+    #dPad {
+         display: grid;
+         margin-top: 50px;
+         margin-left: 30px;
+         height: 175px;
+         width: 175px;
+         border-style: solid;
+         border-radius: 60px;
+         grid-template-columns: 1fr 1fr;
+         grid-template-rows: 1fr 1fr 1fr;
+    }
+    .dPadControls {
+         height: 50px;
+         width: 50px;
+         background-color: rgb(177, 177, 177);
+    }
+    p {
+         margin-top: 200px;
+         width: 350px;
+         font-size: 18px;
+    }#startButton {
+       grid-column: 2 / span 1;
+       justify-self: center;
+       margin-top: 5px;
+  }
 }
