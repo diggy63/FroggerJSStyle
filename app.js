@@ -28,9 +28,7 @@ const stats = document.querySelector("#stats");
 const log1 = document.querySelector("#log");
 const log2 = document.querySelector("#log2");
 const log3 = document.querySelector("#log3");
-const log4 = document.querySelector("#log4");
 const startBtn = document.querySelector("#startButton");
-const testBtn = document.querySelector("#testerButton");
 const winTotal = document.querySelector("#winCount");
 const loseTotal = document.querySelector("#loseCount");
 let hopSpeed = 7;
@@ -40,7 +38,6 @@ let reset = false;
 let winCounter = 0;
 let loseCounter = 0;
 let count = 0;
-let onTree = false;
 let drowned = false;
 let alive = true;
 let win = false;
@@ -65,7 +62,7 @@ let carString = [carOne, carTwo, carThree, carFour];
 let carId = [idEnm, idEnm1, idEnm2, idEnm3];
 let treeStringR = [log1, log3];
 let treeIdR = [idLog, idLog3];
-let treeStringL = [log2, log4];
+let treeStringL = [log2];
 let treeIdL = [idLog2, idLog4];
 const goFrogDisplay = ["GO", "FROGGER", "GO"];
 
@@ -121,7 +118,6 @@ const splashAni = [
 //All my event listener need to start the Game
 startBtn.addEventListener("click", init);
 btnToStart.addEventListener("click", changeDisplay);
-
 
 //function that starts the Game and clears the Screen
 function changeDisplay() {
@@ -206,7 +202,6 @@ function randomCarTree() {
 
 //function that moves frog listen to the Keystoke of the keyboard then send the move direction to my movement function
 function detectInputs(e) {
-     console.log(e.key);
      //this remove keystokes being read so that you dont gain ultimate speed
      removeListen();
      mov = 1;
@@ -256,7 +251,7 @@ function frgHop(directs, cangeVal) {
           clearInterval(iD);
           render();
      }
-     if (mov === 120) {
+     if (mov === 100) {
           clearInterval(iD);
      }
      if (directs === "down") {
@@ -485,6 +480,15 @@ function goFroggerScript() {
           }
      }
 }
+
+//function that starts the Game and clears the Screen
+function changeDisplay() {
+     startScreen.style.display = "none";
+     wrapper.style.display = "block";
+     init();
+     theme.play();
+}
+
 
 //creates Listener to key strokes when you need your key strokes to  working
 function createListen() {
