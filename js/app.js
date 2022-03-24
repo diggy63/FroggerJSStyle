@@ -13,7 +13,6 @@ theme.volume = 0.04;
 const contorller = document.querySelector("#dPad");
 const btnToStart = document.querySelector("#displayNone");
 const wrapper = document.querySelector("#wrapper");
-const startScreen = document.querySelector("#startScreen");
 const frogImg = document.querySelector("#frogImg");
 const testRoad = document.querySelector(".road");
 const frog = document.querySelector("#frog");
@@ -60,6 +59,8 @@ let idEnm = null,
      splashWinId = null,
      iD = null,
      displayId = null;
+
+//All of my arrays and objects
 let carString = [carOne, carTwo, carThree, carFour];
 let carId = [idEnm, idEnm1, idEnm2, idEnm3];
 let treeStringR = [log1, log3];
@@ -117,11 +118,10 @@ const splashAni = [
      "../images/BLANK_ICON.png",
 ];
 
-contorller.addEventListener("click", moveFrg);
-
+//All my event listener need to start the Game
 startBtn.addEventListener("click", init);
 btnToStart.addEventListener("click", changeDisplay);
-// testBtn.addEventListener("click", createNewCar);
+
 
 //function that starts the Game and clears the Screen
 function changeDisplay() {
@@ -131,7 +131,7 @@ function changeDisplay() {
      theme.play();
 }
 
-//restarts Game
+//Inits/restarts Game and reset all varibles to intial state
 function init() {
      goFroggerScript();
      //this function checks to see if the viewpoint is for a phone
@@ -145,7 +145,6 @@ function init() {
           phoneCDetect = 1;
      }
      reset = true;
-     frogImg.src = frogTurn.down;
      //This setTimeout lets the reset = true be read by all the setInterval loops
      //and gives them time to get to there clear postition before assigning
      //new random values. So they wont glitch out
@@ -158,8 +157,9 @@ function init() {
           alive = true;
           win = false;
           reset = false;
+          frogImg.src = frogTurn.down;
           randomCarTree();
-          document.addEventListener("keydown", moveFrg);
+          createListen();
      }, 100);
 }
 
@@ -181,7 +181,7 @@ function render() {
           winTotal.innerHTML = winCounter + ``;
           return;
      }
-     document.addEventListener("keydown", moveFrg);
+     createListen();
      count = 0;
      checkWin();
 }
@@ -196,21 +196,19 @@ function randomCarTree() {
           moveCar(carString[i], carId[i], ranCarOne, ranSpeed);
      }
      for (i = 0; i < 2; i++) {
-          ranSpeed = Math.floor(Math.random() * 5 + 8 - winCounter);
+          ranSpeed = Math.floor((Math.random() * 5) + (8 - winCounter));
           ranTreePlace = Math.floor(Math.random() * 550);
           moveTreeRL(treeStringR[i], treeIdR[i], ranTreePlace, ranSpeed);
      }
 
      moveTreeLR(treeStringL[0], treeIdL[0], 100, 15, -150, 20);
-     //cannot do two logs yet the dectction only works for one row
-     //myMoveBigTreeL(treeStringL[1], treeIdL[1], 300, 15, -300, 20);
 }
 
 //function that moves frog listen to the Keystoke of the keyboard then send the move direction to my movement function
-function moveFrg(e) {
+function detectInputs(e) {
      console.log(e.key);
      //this remove keystokes being read so that you dont gain ultimate speed
-     document.removeEventListener("keydown", moveFrg, false);
+     removeListen();
      mov = 1;
      //depending on which keystroke or dpad you hit its runs a setInterval thats "hops" to
      //its location
@@ -222,29 +220,31 @@ function moveFrg(e) {
                frogImg.src = frogTurn.right;
                iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
           } else {
-               createKeyboardListen();
+               createListen();
           }
      } else if (e.key === "a" || e.target.id === "leftPad") {
           if (frog.style.left != `0px`) {
                frogImg.src = frogTurn.left;
                iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
           } else {
-               createKeyboardListen();
+               createListen();
           }
      } else if (e.key === "w" || e.target.id === "upPad") {
           frogImg.src = frogTurn.up;
           if (frog.style.top != `0px`) {
                iD = setInterval(frgHop, hopSpeed, "up", frog.style.top);
           } else {
-               createKeyboardListen();
+               createListen();
           }
      } else if (e.key === "Enter") {
           init();
      }else{
-      createKeyboardListen();
+      createListen();
      }
      //createKeyboardListen();
 }
+
+
 //function that gives frog smooth hop
 function frgHop(directs, cangeVal) {
      if (alive === false) {
@@ -462,19 +462,9 @@ function winAnimation() {
      }
 }
 
-function centerFrogger() {
-     if (parseInt(frog.style.left) > 250) {
-          frogImg.src = frogTurn.left;
-          iD = setInterval(frgHop, hopSpeed, "left", frog.style.left);
-     } else if (parseInt(frog.style.left) < 250) {
-          frogImg.src = frogTurn.right;
-          iD = setInterval(frgHop, hopSpeed, "right", frog.style.left);
-     }
-}
 //specific function to check for the win con of the game
 function checkWin() {
      if (frog.offsetTop >= winCon.offsetTop - 5) {
-          console.log("win check");
           win = true;
           render();
      }
@@ -499,30 +489,12 @@ function goFroggerScript() {
 }
 
 //creates Listener to key strokes when you need your key strokes to  working
-function createKeyboardListen() {
-     document.addEventListener("keydown", moveFrg);
+function createListen() {
+     document.addEventListener("keydown", detectInputs);
+     contorller.addEventListener("click", detectInputs);
 }
-// function that creates new care on a new Div. Test function for maybe future
-// randomness if i would like to add that.
 
-// function createNewCar (){
-//   ranCarOne = Math.floor(Math.random() * 600);
-//   let newDiv = document.createElement(`div`);
-//   ranSpeed = Math.floor((Math.random() * 5));
-//   newDiv.className = "carClass";
-//   newDiv.innerHTML = '<img src="images/GreenCar.png" alt="Green Car in fourth row" />';
-//   testRoad.append(newDiv);
-//   myMoveEnm(newDiv, testId, 0, ranSpeed);
-
-// }
-
-// let indexTxt = 0;
-// const introTxt = "Welcome to my rendition of Frogger using only html, css, and javascript. To control our little frog body we can use w to move up up, a to move left, s to move down, and d to move right. Try and reach the bottom grassy area without falling into the water or being run over. Enjoy.";
-// const speed = 40;
-// function () {
-//   if (i < txt.length) {
-//     document.getElementById("instruct").innerHTML += txt.charAt(i);
-//     i++;
-//     setTimeout(typeWriter, speed);
-//   }
-// }
+function removeListen(){
+     document.removeEventListener("keydown", detectInputs, false);
+     contorller.removeEventListener("click", detectInputs, false);
+}
