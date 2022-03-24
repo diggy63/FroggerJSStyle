@@ -71,51 +71,51 @@ const goFrogDisplay = ["GO", "FROGGER", "GO"];
 
 //object with static positions for the frogger when he turns
 const frogTurn = {
-     down: "../images/frogStatic.png",
-     right: "../images/frogStaticRight.png",
-     left: "../images/frogStaticLeft.png",
-     up: "../images/frogStaticUp.png",
+     down: "images/frogStatic.png",
+     right: "images/frogStaticRight.png",
+     left: "images/frogStaticLeft.png",
+     up: "images/frogStaticUp.png",
 };
 
 //all the hop animation image array
 const frugHopDown = [
-     "../images/frogStatic.png",
-     "../images/frogJumpDown1.png",
-     "../images/frogJumpDown2.png",
-     "../images/frogJumpDown3.png",
-     "../images/frogJumpDown4.png",
+     "images/frogStatic.png",
+     "images/frogJumpDown1.png",
+     "images/frogJumpDown2.png",
+     "images/frogJumpDown3.png",
+     "images/frogJumpDown4.png",
 ];
 const frugHopUp = [
-     "../images/frogStaticUp.png",
-     "../images/frogJumpUp1.png",
-     "../images/frogJumpUp2.png",
-     "../images/frogJumpUp3.png",
-     "../images/frogJumpUp4.png",
+     "images/frogStaticUp.png",
+     "images/frogJumpUp1.png",
+     "images/frogJumpUp2.png",
+     "images/frogJumpUp3.png",
+     "images/frogJumpUp4.png",
 ];
 const frugHopLeft = [
-     "../images/frogStaticLeft.png",
-     "../images/frogJumpLeft1.png",
-     "../images/frogJumpLeft2.png",
-     "../images/frogJumpLeft3.png",
-     "../images/frogJumpLeft4.png",
+     "images/frogStaticLeft.png",
+     "images/frogJumpLeft1.png",
+     "images/frogJumpLeft2.png",
+     "images/frogJumpLeft3.png",
+     "images/frogJumpLeft4.png",
 ];
 const frugHopRight = [
-     "../images/frogStaticRight.png",
-     "../images/frogJumpRight1.png",
-     "../images/frogJumpRight2.png",
-     "../images/frogJumpRight3.png",
-     "../images/frogJumpRight4.png",
+     "images/frogStaticRight.png",
+     "images/frogJumpRight1.png",
+     "images/frogJumpRight2.png",
+     "images/frogJumpRight3.png",
+     "images/frogJumpRight4.png",
 ];
 //spalsh animation array
 const splashAni = [
-     "../images/splash.png",
-     "../images/splash 2.png",
-     "../images/splash 3.png",
-     "../images/splash 4.png",
-     "../images/splash 5.png",
-     "../images/splash 6.png",
-     "../images/splash 7.png",
-     "../images/BLANK_ICON.png",
+     "images/splash.png",
+     "images/splash 2.png",
+     "images/splash 3.png",
+     "images/splash 4.png",
+     "images/splash 5.png",
+     "images/splash 6.png",
+     "images/splash 7.png",
+     "images/BLANK_ICON.png",
 ];
 
 //All my event listener need to start the Game
@@ -157,7 +157,7 @@ function init() {
           alive = true;
           win = false;
           reset = false;
-          frogImg.src = "https://i.imgur.com/9PX84sh.png";
+          frogImg.src = frogTurn.down;
           randomCarTree();
           createListen();
      }, 100);
@@ -350,7 +350,7 @@ function detect(en) {
                parseInt(frog.offsetLeft) >= en.offsetLeft
           ) {
                alive = false;
-               frogImg.src = "../images/death.png";
+               frogImg.src = "images/death.png";
                removeListen();
                plunckedSound.play();
                render();
