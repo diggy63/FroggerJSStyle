@@ -11,7 +11,7 @@ theme.volume = 0.04;
 
 //=============> grabing everything we need from the Page <==================
 const contorller = document.querySelector("#dPad");
-const btnToStart = document.querySelector("#displayNone");
+const btnToDisplay = document.querySelector("#displayNone");
 const wrapper = document.querySelector("#wrapper");
 const frogImg = document.querySelector("#frogImg");
 const testRoad = document.querySelector(".road");
@@ -28,7 +28,9 @@ const stats = document.querySelector("#stats");
 const log1 = document.querySelector("#log");
 const log2 = document.querySelector("#log2");
 const log3 = document.querySelector("#log3");
-const startBtn = document.querySelector("#startButton");
+const startBtn = document.querySelector("#noneHidder");
+const startBtnSide = document.querySelector("#sideHidder");
+//const startBtnSide = document.querySelector("#startButtonSide");
 const winTotal = document.querySelector("#winCount");
 const loseTotal = document.querySelector("#loseCount");
 let hopSpeed = 7;
@@ -116,8 +118,9 @@ const splashAni = [
 ];
 
 //All my event listener need to start the Game
+startBtnSide.addEventListener("click", init);
 startBtn.addEventListener("click", init);
-btnToStart.addEventListener("click", changeDisplay);
+btnToDisplay.addEventListener("click", changeDisplay);
 
 //function that starts the Game and clears the Screen
 function changeDisplay() {

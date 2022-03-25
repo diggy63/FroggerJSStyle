@@ -65,9 +65,16 @@ p {
 }
 
 #gameBody {
+<<<<<<< HEAD
     max-width: 1000px;
     display: flex;
     justify-content: center;
+=======
+    background-color: rgb(97, 97, 97);
+     max-width: 1000px;
+     display: flex;
+     justify-content: center;
+>>>>>>> main
 }
 #header {
     font-family: "Bungee", cursive;
@@ -192,6 +199,7 @@ img {
 }
 
 #hidder {
+<<<<<<< HEAD
     background-color: rgb(97, 97, 97);
     height: 650px;
     width: 250px;
@@ -215,6 +223,32 @@ img {
 }
 #startButton:active {
     background-color: rgb(111, 111, 111);
+=======
+     background-color: rgb(97, 97, 97);
+     height: 650px;
+     width: 250px;
+     /* background-color: black; */
+     z-index: 980;
+}
+.startButton {
+     background-color: rgb(211, 206, 206);
+     font-family: "Bungee", cursive;
+     font-size: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 100px auto;
+     border-radius: 5px;
+     border-style: solid;
+     width: 90px;
+     height: 60px;
+}
+#sideHidder {
+    display: none;
+}
+.startButton:active {
+     background-color: rgb(111, 111, 111);
+>>>>>>> main
 }
 #midStats {
     color: rgb(55, 55, 55);
@@ -318,6 +352,7 @@ img {
 
 /* 768px is a common "breakpoint" width for tablets */
 @media only screen and (max-height: 1000px) {
+<<<<<<< HEAD
     #header {
          display: none;
     }
@@ -336,6 +371,65 @@ img {
          grid-column: 1 / span 2;
          justify-self: center;
          margin-top: 5px;
+    }
+=======
+    #wrapper{
+        border-radius: 0px;
+
+    }
+    #header {
+          display: none;
+     }
+     #hidder {
+          margin-top: 80px;
+          height: 550px;
+          width: 250px;
+     }
+     #gameBody {
+          margin-top: 20px;
+     }
+     #dPad {
+          display: none;
+     }
+     #startButton {
+          grid-column: 1 / span 2;
+          justify-self: center;
+          margin-top: 5px;
+     }
+>>>>>>> main
+}
+
+@media only screen and (max-height: 700px) {
+    .sideHidder{
+        display: flex;
+    }
+    #header {
+         display: none;
+    }
+    #hidder {
+         margin-top: 80px;
+         height: 550px;
+         width: 250px;
+    }
+    #gameBody {
+         margin-top: 0px;
+         border-radius: 0px;
+    }
+    #gameArea{
+        margin-top: 0px;
+        border-radius: 0px;
+   }
+    #wrapper{
+         border-radius: 0px;
+    }
+    #dPad {
+         display: none;
+    }
+    #noneHidder{
+        display: none;
+    }
+    #sideHidder{
+        display: flex;
     }
 }
 
