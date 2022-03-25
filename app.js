@@ -342,7 +342,6 @@ function detect(en) {
           frog.offsetTop >= parseInt(en.offsetTop) - (30 * phoneConstant) &&
           frog.offsetTop <= parseInt(en.offsetTop) + 49 * phoneConstant
      ) {
-          console.log("here");
           if (
                parseInt(frog.offsetLeft) <= parseInt(en.offsetLeft + (80* phoneConstant)) &&
                parseInt(frog.offsetLeft) >= en.offsetLeft
