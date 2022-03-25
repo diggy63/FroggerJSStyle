@@ -65,6 +65,7 @@ p {
 }
 
 #gameBody {
+    background-color: rgb(97, 97, 97);
      max-width: 1000px;
      display: flex;
      justify-content: center;
@@ -197,10 +198,8 @@ img {
      width: 250px;
      /* background-color: black; */
      z-index: 980;
-     writing-mode: vertical-rl;
-     text-orientation: upright;
 }
-#startButton {
+.startButton {
      background-color: rgb(211, 206, 206);
      font-family: "Bungee", cursive;
      font-size: 20px;
@@ -213,7 +212,10 @@ img {
      width: 90px;
      height: 60px;
 }
-#startButton:active {
+#sideHidder {
+    display: none;
+}
+.startButton:active {
      background-color: rgb(111, 111, 111);
 }
 #midStats {
@@ -318,7 +320,11 @@ img {
 
 /* 768px is a common "breakpoint" width for tablets */
 @media only screen and (max-height: 1000px) {
-     #header {
+    #wrapper{
+        border-radius: 0px;
+
+    }
+    #header {
           display: none;
      }
      #hidder {
@@ -327,7 +333,7 @@ img {
           width: 250px;
      }
      #gameBody {
-          margin-top: 40px;
+          margin-top: 20px;
      }
      #dPad {
           display: none;
@@ -337,6 +343,40 @@ img {
           justify-self: center;
           margin-top: 5px;
      }
+}
+
+@media only screen and (max-height: 700px) {
+    .sideHidder{
+        display: flex;
+    }
+    #header {
+         display: none;
+    }
+    #hidder {
+         margin-top: 80px;
+         height: 550px;
+         width: 250px;
+    }
+    #gameBody {
+         margin-top: 0px;
+         border-radius: 0px;
+    }
+    #gameArea{
+        margin-top: 0px;
+        border-radius: 0px;
+   }
+    #wrapper{
+         border-radius: 0px;
+    }
+    #dPad {
+         display: none;
+    }
+    #noneHidder{
+        display: none;
+    }
+    #sideHidder{
+        display: flex;
+    }
 }
 
 @media only screen and (max-width: 450px) {
